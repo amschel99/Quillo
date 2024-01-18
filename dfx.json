@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "quillo_backend": {
+      "candid": "src/quillo_backend/quillo_backend.did",
+      "package": "quillo_backend",
+      "type": "rust"
+    },
+    "quillo_frontend": {
+      "dependencies": [
+        "quillo_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/quillo_frontend/src/index.html"
+      },
+      "source": [
+        "src/quillo_frontend/assets",
+        "dist/quillo_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
