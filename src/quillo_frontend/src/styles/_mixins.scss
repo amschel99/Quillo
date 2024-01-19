@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
+
+@mixin usebasefont() {
+  font-family: "Open Sans", sans-serif;
+}
+
+@mixin flexmixin($direction, $wrap, $align, $justify, $gap) {
+  display: flex !important;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}

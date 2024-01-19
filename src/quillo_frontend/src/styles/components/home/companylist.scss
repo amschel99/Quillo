@@ -1,0 +1,56 @@
+@import "../../colors";
+@import "../../mixins";
+
+.companylist {
+  @include flexmixin(row, wrap, flex-start, space-between, 0.5rem);
+  width: 100%;
+  margin-top: 0.5rem;
+
+  .company {
+    @include flexmixin(column, no-wrap, flex-start, flex-start, 4rem);
+    width: 49%;
+    padding-top: 0.5rem;
+    background-color: $secondary;
+    border: 1px solid $divider_faint;
+    border-radius: 0.5rem;
+
+    p {
+      font-weight: 300;
+    }
+
+    .shares,
+    .eqn {
+      margin-left: 0.5rem;
+    }
+
+    .shares {
+      p {
+        margin-bottom: 0.5rem;
+        font-weight: lighter;
+      }
+    }
+
+    .eqn {
+      font-size: 1.25rem;
+      color: $text_secondary;
+    }
+
+    button {
+      @include usebasefont();
+      @include flexmixin(row, no-wrap, center, center, 0.5rem);
+      width: 100%;
+      border: 0;
+      border-top: 1px solid $divider_faint;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      background-color: transparent;
+      outline: none;
+      outline-color: transparent;
+      cursor: pointer;
+
+      p {
+        color: $text_primary;
+      }
+    }
+  }
+}

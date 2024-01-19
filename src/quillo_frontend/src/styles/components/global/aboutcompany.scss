@@ -1,0 +1,122 @@
+@import "../../colors";
+@import "../../mixins";
+
+#aboutcompany {
+  position: absolute;
+  width: 40rem;
+  min-height: 40rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $secondary;
+  border: 1px solid $divider_fainter;
+  border-radius: 0.5rem;
+  @include flexmixin(column, no-wrap, flex-start, space-between, 0);
+
+  p {
+    font-size: 1rem;
+    color: $text_primary;
+  }
+
+  .plchlder_ {
+    color: $text_secondary;
+  }
+
+  .company_name {
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    border: 0;
+    border-bottom: 1px solid $divider_fainter;
+  }
+
+  .reg_name {
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    .plchlder_ {
+      margin-bottom: 0.625rem;
+    }
+
+    .ttle_ {
+      text-align: justify;
+    }
+  }
+
+  .shares {
+    width: 100%;
+    margin-top: 0.625rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    .av_shares {
+      @include flexmixin(row, no-wrap, center, space-between, 0);
+      width: 100%;
+      margin-top: 0.625rem;
+
+      .sh_class {
+        width: 49%;
+        padding: 0.25rem;
+        border: 1px solid $divider_faint;
+        border-radius: 0.375rem;
+        background-color: $primary_faint;
+
+        div {
+          @include flexmixin(row, no-wrap, center, space-between, 0);
+          margin-bottom: 0.25rem;
+
+          span {
+            color: $text_secondary;
+          }
+        }
+      }
+    }
+  }
+
+  .docs {
+    div {
+      @include flexmixin(row, no-wrap, center, flex-start, 1.25rem);
+    }
+
+    span {
+      .plchlder_ {
+        margin-right: 0.5rem;
+        color: $text_primary;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .buttons {
+    @include flexmixin(row, no-wrap, center, space-between, 0);
+    width: 100%;
+    padding: 0.625rem;
+    border: 0;
+    border-top: 1px solid $divider_fainter;
+    background-color: $primary_faint;
+
+    .cancel {
+      border-right: 1px solid $divider_fainter;
+    }
+
+    button {
+      width: 48%;
+      height: 100%;
+      padding: 0.125rem;
+      border: 0;
+      outline: none;
+      outline-color: transparent;
+      background-color: transparent;
+      cursor: pointer;
+      @include flexmixin(row, no-wrap, center, center, 0.5rem);
+
+      span {
+        font-size: 1rem;
+        color: $text_primary;
+      }
+    }
+  }
+}
