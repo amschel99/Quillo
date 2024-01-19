@@ -2,7 +2,7 @@
 #[macro_use]
 extern crate serde;
 use candid::{Decode, Encode};
-use company::{Tokenizable, Valuable};
+use company::Tokenizable;
 use ic_cdk::api::time;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable};
@@ -44,7 +44,7 @@ fn add_company(company: company::CompanyInformation) -> Option<company::CompanyI
             counter.borrow_mut().set(current_value + 1)
         })
         .expect("cannot increment id counter");
-    let company = company::CompanyInformation {
+    let mut company = company::CompanyInformation {
         id: company.id,
         name: company.name,
         registration_number: company.registration_number,
@@ -53,11 +53,16 @@ fn add_company(company: company::CompanyInformation) -> Option<company::CompanyI
         logo: company.logo,
         earnings: company.earnings,
         multiplier: company.multiplier,
-        valuation: company.valuate(),
-        token_value: company.tokenize(),
+        valuation: 0.00,
+        token_value: 0.00,
         token_balance: Some(10000.0),
         initial_tokens: Some(10000.0),
     };
+    let company_valuation = company.valuate();
+    let company_token_value = company.tokenize();
+    company.valuation = company_valuation;
+    company.token_value = company_token_value;
+
     do_insert_company(&company);
     Some(company)
 }
@@ -103,8 +108,4 @@ fn _get_company(id: &u64) -> Option<company::CompanyInformation> {
 #[derive(candid::CandidType, Deserialize, Serialize)]
 enum Error {
     NotFound { msg: String },
-}
-
-impl investor::CanPurchase {
-    fn purchase_tokens() {}
 }

@@ -48,24 +48,15 @@ pub trait Onboardable {
         multiplier: MultiplierData,
     ) -> Self;
 }
-
-pub trait Valuable {
-    fn valuate(&self) -> f64;
-}
-
-pub trait Tokenizable {
-    fn tokenize(&self) -> f64;
-}
-
-impl Valuable for CompanyInformation {
-    fn valuate(&self) -> f64 {
+impl CompanyInformation {
+    pub fn valuate(&self) -> f64 {
         let int_income: f64;
         let int_multiplier: f64;
 
         if self.earnings.consistency {
-            int_income = self.earnings.net_income
+            int_income = self.earnings.net_income;
         } else {
-            int_income = self.earnings.net_income + self.earnings.adjustments
+            int_income = self.earnings.net_income + self.earnings.adjustments;
         }
         int_multiplier = self.multiplier.industry_comparables
             * self.multiplier.growth_prospects
@@ -75,6 +66,10 @@ impl Valuable for CompanyInformation {
 
         int_income * int_multiplier
     }
+}
+
+pub trait Tokenizable {
+    fn tokenize(&self) -> f64;
 }
 
 impl Tokenizable for CompanyInformation {
