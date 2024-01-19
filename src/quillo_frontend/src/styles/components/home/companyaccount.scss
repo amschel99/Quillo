@@ -1,0 +1,124 @@
+@import "../../colors";
+@import "../../mixins";
+
+.companyaccount {
+  margin-top: 4.75rem;
+  margin-left: 2rem;
+  width: 100%;
+
+  .titles {
+    font-size: 1rem;
+    color: $text_primary;
+  }
+
+  .fainttitle {
+    font-size: 0.875rem;
+    color: $text_secondary;
+  }
+
+  .lgmargin {
+    margin-top: 1rem;
+  }
+
+  .smmargin {
+    margin-top: 0.625rem;
+  }
+
+  .buttons {
+    width: 100%;
+    margin-top: 0.625rem;
+    @include flexmixin(row, no-wrap, flex-start, flex-start, 2rem);
+
+    .button {
+      width: 28%;
+      height: 3rem;
+      padding: 0.5rem;
+      background-color: $secondary;
+      border: 1px solid $divider_faint;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      @include flexmixin(row, no-wrap, center, center, 0.75rem);
+
+      span {
+        font-size: 0.875rem;
+        color: $text_secondary;
+      }
+
+      .divider {
+        width: 1px;
+        height: 100%;
+        background-color: $divider_faint;
+      }
+    }
+  }
+
+  .av_shares {
+    width: 100%;
+    margin-top: 0.625rem;
+    @include flexmixin(row, no-wrap, center, flex-start, 1rem);
+
+    .sh_class {
+      width: 30%;
+      padding: 0.25rem;
+      border: 1px solid $divider_faint;
+      border-radius: 0.375rem;
+      background-color: $secondary;
+
+      p {
+        font-size: 0.875rem;
+      }
+
+      div {
+        @include flexmixin(row, no-wrap, center, space-between, 0);
+
+        span {
+          margin-bottom: 0.5rem;
+          font-size: 0.875rem;
+          color: $text_secondary;
+        }
+      }
+    }
+
+    .init {
+      p {
+        font-size: 0.875rem;
+        color: $text_secondary;
+      }
+    }
+  }
+
+  .website {
+    position: absolute;
+    bottom: 1.25rem;
+
+    width: 50%;
+    height: 3.625rem;
+    border: 1px solid $divider_faint;
+    border-radius: 0.375rem;
+    background-color: $secondary;
+    @include flexmixin(row, no-wrap, center, space-between, 0);
+
+    input {
+      height: 80%;
+      width: 80%;
+      margin-left: 0.5rem;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+      outline: transparent;
+      font-size: 1rem;
+      color: $text_primary;
+    }
+
+    .savebtn {
+      height: 100%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      border: 1px solid $divider_faint;
+      border-radius: 0.375rem;
+      background-color: rgba($color: $primary, $alpha: 0.5);
+      cursor: pointer;
+      @include flexmixin(row, no-wrap, center, center, 0.5rem);
+    }
+  }
+}

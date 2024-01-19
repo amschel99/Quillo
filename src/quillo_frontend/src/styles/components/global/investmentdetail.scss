@@ -1,0 +1,69 @@
+@import "../../colors";
+@import "../../mixins";
+
+#investmentdetails {
+  position: absolute;
+  width: 40rem;
+  min-height: 40rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $secondary;
+  border: 1px solid $divider_fainter;
+  border-radius: 0.5rem;
+  @include flexmixin(column, no-wrap, flex-start, space-between, 0);
+
+  .company_name {
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    border: 0;
+    border-bottom: 1px solid $divider_fainter;
+  }
+
+  .inv {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    p {
+      color: $text_primary;
+    }
+
+    .tle {
+      color: $text_secondary;
+      margin-bottom: 0.625rem;
+    }
+  }
+
+  .buttons {
+    @include flexmixin(row, no-wrap, center, space-between, 0);
+    width: 100%;
+    padding: 0.625rem;
+    border: 0;
+    border-top: 1px solid $divider_fainter;
+    background-color: $primary_faint;
+
+    .cancel {
+      border-right: 1px solid $divider_fainter;
+    }
+
+    button {
+      width: 48%;
+      height: 100%;
+      padding: 0.125rem;
+      border: 0;
+      outline: none;
+      outline-color: transparent;
+      background-color: transparent;
+      cursor: pointer;
+      @include flexmixin(row, no-wrap, center, center, 0.5rem);
+
+      span {
+        font-size: 1rem;
+        color: $text_primary;
+      }
+    }
+  }
+}

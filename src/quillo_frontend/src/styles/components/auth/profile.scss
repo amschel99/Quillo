@@ -1,0 +1,136 @@
+@import "../../colors";
+@import "../../mixins";
+
+.companyprofile {
+  @include flexmixin(column, no-wrap, flex-start, space-between, 0);
+  width: 36rem;
+  height: 36rem;
+  padding: 0.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid $divider_faint;
+  border-radius: 0.5rem;
+  transform: translate(-50%, -50%);
+  background-color: $alert;
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input,
+  textarea {
+    @include usebasefont();
+    outline: none;
+    outline-color: transparent;
+    color: $text_primary;
+    font-size: 0.875rem;
+  }
+
+  .title {
+    color: $text_secondary;
+  }
+
+  .top {
+    width: 100%;
+
+    p {
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      border-radius: 0.5rem;
+      background-color: $divider_faint;
+    }
+  }
+
+  .companyname {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    background-color: transparent;
+    border-width: 0;
+    border-bottom: 1px solid $divider_faint;
+  }
+
+  #companydescription {
+    width: 100%;
+
+    span {
+      @include flexmixin(row, no-wrap, center, space-between, 0);
+      margin-bottom: 0.5rem;
+    }
+
+    textarea {
+      resize: none;
+      width: 100%;
+      height: 8rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      background-color: rgba($color: $secondary, $alpha: 0.4);
+      border: 1px solid $divider_faint;
+    }
+  }
+
+  .files {
+    width: 100%;
+    @include flexmixin(row, no-wrap, center, space-between, 0);
+
+    label {
+      @include flexmixin(row, no-wrap, center, center, 0.5rem);
+      width: 48%;
+      height: 2.75rem;
+      padding: 0.5rem;
+      border: 1px solid $divider_faint;
+      border-radius: 0.5rem;
+      background: $primary_faint;
+      cursor: pointer;
+    }
+  }
+
+  .shares {
+    @include flexmixin(row, no-wrap, center, space-between, 0);
+    width: 100%;
+    margin-top: -1rem;
+
+    div {
+      width: 48%;
+      padding: 0.5rem;
+      border: 1px solid $divider_faint;
+      border-radius: 0.5rem;
+      background-color: $primary_faint;
+
+      span {
+        @include flexmixin(row, no-wrap, center, space-between, 0);
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        outline-color: transparent;
+      }
+    }
+  }
+
+  .submit {
+    @include flexmixin(row, no-wrap, center, center, 0.5rem);
+    @include usebasefont();
+    width: 100%;
+    padding: 0.5rem;
+    border: 0;
+    outline: none;
+    outline-color: transparent;
+    border-radius: 0.5rem;
+    background-color: rgba($color: $secondary, $alpha: 0.5);
+    font-size: 1rem;
+    color: $text_secondary;
+    cursor: pointer;
+  }
+}

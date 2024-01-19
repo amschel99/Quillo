@@ -1,0 +1,28 @@
+@import "../../colors";
+@import "../../mixins";
+
+#account {
+  @include flexmixin(row, no-wrap, center, flex-end, 1rem);
+  position: absolute;
+  top: 1.5rem;
+  right: 0.5rem;
+
+  p {
+    color: $text_secondary;
+  }
+
+  button {
+    @include usebasefont();
+    @include flexmixin(row, no-wrap, center, center, 1rem);
+    border: 1px solid $divider_faint;
+    border-radius: 0.5rem;
+    padding: 10px 4rem 10px 4rem;
+    background-color: $secondary;
+    cursor: pointer;
+
+    span {
+      font-size: 1rem;
+      color: $text_primary;
+    }
+  }
+}
