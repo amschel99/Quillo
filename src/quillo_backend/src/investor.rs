@@ -1,19 +1,20 @@
-use std::borrow::Cow;
-
+use crate::company::CompanyInformation;
 use candid::{Decode, Encode};
 use ic_stable_structures::{BoundedStorable, Storable};
+use std::borrow::Cow;
 
-use crate::company::CompanyInformation;
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
 pub struct Share {
-    quantity: u64,
-    company: CompanyInformation,
+    pub quantity: u64,
+    pub company: CompanyInformation,
 }
+
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
 pub struct Wallet {
     pub id: u64,
     pub amount: f64,
 }
+
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
 pub struct Investor {
     pub id: u64,

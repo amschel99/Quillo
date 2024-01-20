@@ -35,9 +35,9 @@ pub struct CompanyInformation {
     pub multiplier: MultiplierData,
     pub valuation: f64,
     pub token_value: f64,
-
     pub initial_tokens: Option<f64>,
     pub token_balance: Option<f64>,
+    pub shares_public_percent: f64,
 }
 
 pub trait Onboardable {
@@ -79,8 +79,9 @@ pub trait Tokenizable {
 impl Tokenizable for CompanyInformation {
     fn tokenize(&self) -> f64 {
         let shares_constant: f64 = 10000.0;
-        let company_valution: f64 = self.valuation;
-        let value_per_share: f64 = company_valution / shares_constant;
+        /*public_company_valution -> part of company valuation to be shared publicly*/
+        let public_company_valution: f64 = self.valuation / self.shares_public_percent;
+        let value_per_share: f64 = public_company_valution / shares_constant;
 
         value_per_share
     }

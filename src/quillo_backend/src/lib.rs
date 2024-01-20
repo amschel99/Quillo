@@ -2,10 +2,11 @@
 #[macro_use]
 extern crate serde;
 use candid::{Decode, Encode};
-use company::Tokenizable;
+use company::{CompanyInformation, Tokenizable};
 use ic_cdk::api::time;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable};
+use investor::{Investor, Share};
 use std::{borrow::Cow, cell::RefCell};
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
@@ -57,6 +58,7 @@ fn add_company(company: company::CompanyInformation) -> Option<company::CompanyI
         token_value: 0.00,
         token_balance: Some(10000.0),
         initial_tokens: Some(10000.0),
+        shares_public_percent: company.shares_public_percent,
     };
     let company_valuation = company.valuate();
     let company_token_value = company.tokenize();
@@ -106,6 +108,7 @@ fn _get_company(id: &u64) -> Option<company::CompanyInformation> {
 }
 
 type CompaniesData = (u64, company::CompanyInformation);
+type InvestorData = (u64, investor::Investor);
 
 #[ic_cdk::query]
 fn get_companies() -> Result<Vec<CompaniesData>, Error> {
