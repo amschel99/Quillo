@@ -1,10 +1,10 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import {
   ArrowIcon,
   CheckIcon,
   PublicIcon,
   RefreshIcon,
-} from "../../../assets/icons";
+} from "../../assets/icons";
 import "../../styles/components/home/companyaccount.scss";
 
 interface companyAccProps {

@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
-import { SearchIcon } from "../../../assets/icons";
+import { JSX } from "react";
+import { SearchIcon } from "../../assets/icons";
 import "../../styles/components/home/search.scss";
 
 export const Search = (): JSX.Element => {

@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
-import { AwesomeIcon } from "../../../assets/icons";
+import { JSX } from "react";
+import { AwesomeIcon } from "../../assets/icons";
 import "../../styles/components/home/myinvestors.scss";
 
 export const InvestorsList = (): JSX.Element => {

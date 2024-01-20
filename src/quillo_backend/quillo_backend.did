@@ -27,10 +27,15 @@ type MultiplierData = record {
   industry_comparables : float64;
   market_conditions : float64;
 };
-type Result = variant { Ok : CompanyInformation; Err : Error };
+type Result = variant {
+  Ok : vec record { nat64; CompanyInformation };
+  Err : Error;
+};
+type Result_1 = variant { Ok : CompanyInformation; Err : Error };
 type Share = record { company : CompanyInformation; quantity : nat64 };
 service : {
   add_company : (CompanyInformation) -> (opt CompanyInformation);
   add_investor : (Investor) -> (opt Investor);
-  get_company : (nat64) -> (Result) query;
+  get_companies : () -> (Result) query;
+  get_company : (nat64) -> (Result_1) query;
 }
