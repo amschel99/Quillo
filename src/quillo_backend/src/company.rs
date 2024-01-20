@@ -13,6 +13,7 @@ pub struct EarningsData {
     consistency: bool,
     adjustments: f64,
 }
+
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
 pub struct MultiplierData {
     industry_comparables: f64,
@@ -21,6 +22,7 @@ pub struct MultiplierData {
     market_conditions: f64,
     comparable_transactions: f64,
 }
+
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
 pub struct CompanyInformation {
     pub id: u64,
@@ -37,6 +39,7 @@ pub struct CompanyInformation {
     pub initial_tokens: Option<f64>,
     pub token_balance: Option<f64>,
 }
+
 pub trait Onboardable {
     fn onboard_company(
         name: &str,
@@ -48,6 +51,7 @@ pub trait Onboardable {
         multiplier: MultiplierData,
     ) -> Self;
 }
+
 impl CompanyInformation {
     pub fn valuate(&self) -> f64 {
         let int_income: f64;

@@ -105,7 +105,25 @@ fn _get_company(id: &u64) -> Option<company::CompanyInformation> {
     STORAGE.with(|s| s.borrow().get(id))
 }
 
+type CompaniesData = (u64, company::CompanyInformation);
+
+#[ic_cdk::query]
+fn get_companies() -> Result<Vec<CompaniesData>, Error> {
+    match _get_companies() {
+        Some(companies) => Ok(companies),
+        None => Err(Error::NotFound {
+            msg: format!("Information temporarily unavailable"),
+        }),
+    }
+}
+
+fn _get_companies() -> Option<Vec<CompaniesData>> {
+    Some(STORAGE.with(|s| s.borrow().iter().collect()))
+}
+
 #[derive(candid::CandidType, Deserialize, Serialize)]
 enum Error {
     NotFound { msg: String },
 }
+
+ic_cdk::export_candid!();
