@@ -1,4 +1,5 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
+import { TransparentIcon } from "../../assets/icons";
 
 interface carouselProps {
   dptext: string;

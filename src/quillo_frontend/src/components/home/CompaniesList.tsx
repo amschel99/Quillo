@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
-import { ArrowIcon } from "../../../assets/icons";
+import { JSX } from "react";
+import { ArrowIcon } from "../../assets/icons";
 import "../../styles/components/home/companylist.scss";
 
 interface companyprops {

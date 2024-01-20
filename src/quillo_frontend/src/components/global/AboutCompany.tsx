@@ -1,10 +1,10 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import {
   AwesomeIcon,
   CancelIcon,
   PublicIcon,
   SlantArrowIcon,
-} from "../../../assets/icons";
+} from "../../assets/icons";
 import "../../styles/components/global/aboutcompany.scss";
 
 interface aboutProps {

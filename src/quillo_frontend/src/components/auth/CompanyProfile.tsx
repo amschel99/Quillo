@@ -1,10 +1,10 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import {
   ArrowIcon,
   ParagraphIcon,
   PublicIcon,
   UploadIcon,
-} from "../../../assets/icons";
+} from "../../assets/icons";
 import "../../styles/components/auth/profile.scss";
 
 export const CompanyProfile = (): JSX.Element => {

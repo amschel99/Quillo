@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
-import { AwesomeIcon, CancelIcon } from "../../../assets/icons";
+import { JSX } from "react";
+import { AwesomeIcon, CancelIcon } from "../../assets/icons";
 import "../../styles/components/global/investmentdetail.scss";
 
 interface invdetails {

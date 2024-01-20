@@ -1,4 +1,4 @@
-import React, { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { Search } from "../components/home/Search";
 import { CompaniesList } from "../components/home/CompaniesList";
 import { MyInvestments } from "../components/home/MyInvestments";
@@ -28,7 +28,7 @@ export default function Home(): JSX.Element {
       <div className="left_sect">
         {acctype && acctype == "bns" ? (
           <>
-            <p className="invs_titles">{companydata?.companyName} Investors</p>
+            <p className="invs_titles">CompanyName Investors</p>
             <InvestorsList />
           </>
         ) : (
@@ -44,10 +44,10 @@ export default function Home(): JSX.Element {
         {acctype && acctype == "bns" ? (
           <>
             <CompanyAccount
-              companyName={companydata?.companyName}
-              companyDescription={companydata?.description}
-              availableshares={Number(companydata?.publicShares)}
-              valuepershare={Number(companydata?.valuePerShare)}
+              companyName="Company Name"
+              companyDescription="Description"
+              availableshares={1233}
+              valuepershare={45896}
               initalsharecount={10000}
             />
           </>

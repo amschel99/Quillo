@@ -1,6 +1,6 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import { useNavigate } from "react-router-dom";
-import { LogoutIcon } from "../../../assets/icons";
+import { LogoutIcon } from "../../assets/icons";
 import "../../styles/components/global/account.scss";
 
 export const Account = (): JSX.Element => {
