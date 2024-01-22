@@ -1,122 +1,99 @@
-# Quillo - Tokenizing Company Shares on the ICP Blockchain
+# Tokenization Platform Documentation
 
-Quillo is a platform designed to tokenize company shares using the Internet Computer (ICP) blockchain. It leverages the Rust CDK for smart contract development and React.js for the user interface. The platform allows companies to onboard, undergo valuation using Discounted Cash Flow and Multiple of earnings algorithms to tokenize a portion of their shares, and facilitate trading of these tokens on the blockchain.
+## Introduction
 
-## Table of Contents
+This document provides a comprehensive overview of our tokenization platform, detailing the logic behind tokenization, the valuation process, and the classification of companies into different classes.
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
+## Tokenization Logic
 
-## Features
+### 1. Company Onboarding
 
-- **Valuation Algorithm:** Utilizes Multiple of earnings and Discounted Cash flow methods for comprehensive valuation.
-- **Tokenization:** Converts a specified percentage of company shares into tokens for trading.
-- **Investor Trading:** Allows investors to buy, sell, and trade these tokens on the ICP blockchain.
-- **Liquidity:** Provides liquidity options for investors to buy fractions of tokens.
-- **Financial Statement Updates:** Companies can regularly update their financial statements for reevaluation.
+Companies undergo a seamless onboarding process, which includes registration, due diligence, and the collection of necessary documentation. This ensures that only legitimate and compliant companies participate in the tokenization platform.
 
-## Installation
+### 2. Valuation
 
-### Prerequisites
+#### 2.1 Financial Assessment
 
-Make sure you have the following installed on your system:
+Upon successful onboarding, a rigorous financial assessment is conducted. This involves a thorough examination of the company's financials using established valuation methods such as discounted cash flow (DCF) analysis, comparable company analysis, and third-party audits.
 
-- Rust: [Installation Guide](https://www.rust-lang.org/learn/get-started)
-- Node.js: [Download Page](https://nodejs.org/)
-- DFINITY Canister SDK (dfx): [Installation Guide](https://sdk.dfinity.org/docs/quickstart/quickstart.html)
+#### 2.2 Tokenization Decision
 
-### Clone and Build
+Based on the company's valuation, a decision is made on the percentage of ownership to be tokenized. For example, a company valued at $10 million may decide to tokenize 20%, resulting in a tokenization value of $2 million.
 
-1. Clone the Quillo repository:
+### 3. Tokenization Process
 
-   ```bash
-   git clone https://github.com/your-username/quillo.git
-   cd quillo
-   ```
+#### 3.1 Token Standards
 
-## Usage
+The platform supports industry-standard token standards such as ERC-20. This ensures compatibility with existing blockchain ecosystems and facilitates the smooth integration of tokens.
 
-1. **Run Locally:**
+#### 3.2 Smart Contracts
 
-   Start the local development environment:
+Smart contracts are developed to govern the tokenization process. These contracts dictate rules for token issuance, transfer, and compliance, providing transparency and security throughout the lifecycle of the tokens.
 
-   ```bash
-   dfx start --background
-   ```
+### 4. Token Issuance
 
-   Build and Deploy the canisters locally:
+#### 4.1 Nominal Value
 
-   ```bash
-   npm run gen-deploy
-   ```
+The platform determines a nominal value for each token. This can be a fixed amount or a fraction of the company's valuation. For instance, if 2 million tokens are issued for a $2 million valuation, each token has a nominal value of $1.
 
-2. **Interact with the UI:**
+#### 4.2 Token Distribution
 
-   Access the web interface by navigating to the generated url on your browser.
+Tokens are issued to the company's digital wallet on the blockchain. The company then distributes these tokens to investors based on their contributions during fundraising campaigns.
 
+### 5. Investor Onboarding
 
-   ### Considerations
-   # Tokenization Platform README
+Investors register on the platform, complete Know Your Customer (KYC) and Anti-Money Laundering (AML) procedures, and set up digital wallets to receive the tokens.
 
-## Tokenization Process
+### 6. Fundraising Campaign
 
-### 1. Third-Party Valuation
+Companies create fundraising campaigns on the platform, specifying the amount to be raised and the percentage of ownership tokens offered. Investors contribute funds, and upon reaching the fundraising goal, ownership tokens are automatically allocated to their wallets.
 
-#### 1.1 Objective:
-- Obtain a reliable valuation of the company from trusted third-party services.
+### 7. Secondary Market (Optional)
 
-#### 1.2 Implementation:
-- Integrate third-party valuation reports to determine the real-world value of the company.
+The platform supports a secondary market where investors can trade ownership tokens, providing liquidity and flexibility in the market.
 
-### 2. Stablecoin Integration
+### 8. Dividend Distribution
 
-#### 2.1 Objective:
-- Stabilize token value by pegging it to a stablecoin, providing predictability for investors.
+If the company generates profits, smart contracts automatically distribute dividends to token holders based on their ownership percentage.
 
-#### 2.2 Implementation:
-- Set a stablecoin conversion rate to represent the real-world value of tokens.
+### 9. Monitoring and Reporting
 
-### 3. Tokenization Formula
+The platform provides real-time updates on the company's performance, financial reports, and changes in ownership. Investors can access transparent and immutable records on the blockchain.
 
-#### 3.1 Objective:
-- Convert company valuation into tokens transparently and systematically.
+## Valuation and Company Classes
 
-#### 3.2 Implementation:
-- Calculate Tokens = (Company Valuation * Conversion Rate)
+### 1. Valuation-Based Classes
 
-#### 3.3 Additional Factors (Optional):
-- Integrate multipliers or adjustments based on strategic value or specific terms.
+To cater to companies of varying sizes, we introduce a classification system based on valuation.
 
-### 4. Token Allocation
+#### 1.1 Class A (Small Companies)
 
-#### 4.1 Objective:
-- Allocate tokens to investors, stakeholders, and the company.
+- Valuation Range: $1 million to $5 million
+- Predefined Token Allocation: e.g., 1 million tokens
 
-#### 4.2 Implementation:
-- Distribute tokens based on ownership percentages after the tokenization formula is applied.
+#### 1.2 Class B (Medium Companies)
 
-### 5. Post-Token Sale Scenario
+- Valuation Range: $5 million to $20 million
+- Predefined Token Allocation: e.g., 5 million tokens
 
-#### 5.1 Outcome:
-- If all tokens are bought:
-  - Successful token sale providing funds for the company.
-  - Increased investor ownership.
-  - Token liquidity in the secondary market.
-  - Clear token utility and governance.
-  - Considerations for future token issuance.
-  - Ongoing communication with token holders.
-  - Compliance with regulations.
-  - Business execution with raised capital.
+#### 1.3 Class C (Large Companies)
+
+- Valuation Range: $20 million to $50 million
+- Predefined Token Allocation: e.g., 10 million tokens
+
+#### 1.4 Class D (Very Large Companies)
+
+- Valuation Range: $50 million and above
+- Predefined Token Allocation: e.g., 20 million tokens
+
+### 2. Flexibility within Classes
+
+Companies within each class have some flexibility in choosing the exact number of tokens, allowing for customization based on their specific valuation and fundraising needs.
+
+### 3. Guidance for Companies
+
+Guidance is provided to companies on which class might be most suitable based on their valuations, ensuring a streamlined tokenization process.
 
 ## Conclusion
 
-This Tokenization Platform aims to revolutionize the way companies tokenize shares, providing transparency, security, and efficiency. Please refer to this documentation for a comprehensive understanding of the platform's features and processes.
-
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+This comprehensive documentation outlines the intricate details of our tokenization platform, covering the logic behind tokenization, the valuation process, and the introduction of company classes. Further refinement and development will be based on market feedback and evolving industry standards.
