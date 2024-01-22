@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import React, { JSX } from "react";
 import { ArrowIcon } from "../../assets/icons";
 import "../../styles/components/home/investments.scss";
 
@@ -11,6 +11,139 @@ export const MyInvestments = ({
 }: investmentprops): JSX.Element => {
   return (
     <div id="investment_list">
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
+      <div className="investment">
+        <div>
+          <p className="companyname">Equinshares</p>
+
+          <p>100K shares</p>
+
+          <p>2 ICP - 10 shares</p>
+        </div>
+
+        <span onClick={() => setshowinvestment(true)} className="arrow">
+          <ArrowIcon />
+        </span>
+      </div>
       <div className="investment">
         <div>
           <p className="companyname">Equinshares</p>

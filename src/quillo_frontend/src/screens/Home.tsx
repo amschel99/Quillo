@@ -1,4 +1,4 @@
-import { JSX, useEffect, useState } from "react";
+import React, { JSX, useState } from "react";
 import { Search } from "../components/home/Search";
 import { CompaniesList } from "../components/home/CompaniesList";
 import { MyInvestments } from "../components/home/MyInvestments";
@@ -10,18 +10,17 @@ import { Investmentdetail } from "../components/global/InvestmentDetail";
 import "../styles/screens/home.scss";
 
 export default function Home(): JSX.Element {
-  const [companydata, setcompanydata] = useState<{} | any>({});
+  // const [companydata, setcompanydata] = useState<{} | any>({});
   const [showcompany, setshowcompany] = useState<boolean>(false);
   const [showinvestment, setshowinvestment] = useState<boolean>(false);
 
   const acctype: any = localStorage.getItem("acctype");
-  const currentURL = window.location.href;
+  // const currentURL = window.location.href;
 
-  const urlParts: string[] = currentURL.split("/");
+  // const urlParts: string[] = currentURL.split("/");
 
-  const homeIndex: number = urlParts.indexOf("home");
-
-  const paramValue: string = String(urlParts[homeIndex + 1]);
+  // const homeIndex: number = urlParts.indexOf("home");
+  // const paramValue: string = String(urlParts[homeIndex + 1]);
 
   return (
     <section className="main">
@@ -35,6 +34,7 @@ export default function Home(): JSX.Element {
           <>
             <Search />
             <p className="title">All Companies</p>
+
             <CompaniesList setshowcompany={setshowcompany} />
           </>
         )}

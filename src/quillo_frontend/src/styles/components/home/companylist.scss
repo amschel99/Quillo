@@ -4,7 +4,10 @@
 .companylist {
   @include flexmixin(row, wrap, flex-start, space-between, 0.5rem);
   width: 100%;
+  height: calc(100vh - 9.05rem);
   margin-top: 0.5rem;
+  overflow-y: scroll;
+  border-radius: 0.5rem;
 
   .company {
     @include flexmixin(column, no-wrap, flex-start, flex-start, 4rem);
