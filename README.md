@@ -86,13 +86,6 @@ To cater to companies of varying sizes, we introduce a classification system bas
 - Valuation Range: $50 million and above
 - Predefined Token Allocation: e.g., 20 million tokens
 
-### 2. Flexibility within Classes
-
-Companies within each class have some flexibility in choosing the exact number of tokens, allowing for customization based on their specific valuation and fundraising needs.
-
-### 3. Guidance for Companies
-
-Guidance is provided to companies on which class might be most suitable based on their valuations, ensuring a streamlined tokenization process.
 
 ## Conclusion
 
