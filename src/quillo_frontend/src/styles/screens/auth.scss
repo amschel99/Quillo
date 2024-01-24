@@ -25,8 +25,20 @@
       @include flexmixin(column, no-wrap, center, center, 4rem);
 
       p {
-        font-size: 1.75rem;
-        color: $text_secondary;
+        background-image: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+        background-image: linear-gradient(to right, #f80759, #bc4e9c);
+        font-size: 2rem;
+        font-weight: bolder;
+        color: transparent;
+        background-clip: text;
+      }
+
+      .carousel_icon {
+        width: 20rem;
+        height: 20rem;
+        border-radius: 0.875rem;
+        background-color: rgba($color: $secondary, $alpha: 0.35);
+        @include flexmixin(row, no-wrap, center, center, 0);
       }
     }
 

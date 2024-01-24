@@ -1,6 +1,5 @@
-import { JSX, useState } from "react";
+import React, { JSX, useState } from "react";
 import { Carousel } from "../components/auth/Carousel";
-import { useNavigate } from "react-router-dom";
 import {
   ArrowIcon,
   ChevronLeftIcon,
@@ -15,8 +14,6 @@ import "../styles/screens/auth.scss";
 export default function Auth(): JSX.Element {
   const [curridx, setcurridx] = useState<number>(0);
   const [acctype, setacctype] = useState<string>("");
-
-  const navigation = useNavigate();
 
   const carouselcontent = [
     { dptext: "Transparent", icon: <TransparentIcon /> },
@@ -78,7 +75,7 @@ export default function Auth(): JSX.Element {
 
             {carouselcontent.map((cntnt, idx) => (
               <div
-                key={idx}
+                key={cntnt.dptext + idx}
                 className="indicator_"
                 style={{
                   backgroundColor:
@@ -133,17 +130,6 @@ export default function Auth(): JSX.Element {
           <button
             disabled={acctype == "" ? true : false}
             className="signin"
-            onClick={() => {
-              signIn()
-                .then((data) => {
-                  console.log(JSON.stringify(data));
-
-                  navigation("onboarding");
-                })
-                .catch((e) => {
-                  //
-                });
-            }}
             style={{ cursor: acctype == "" ? "not-allowed" : "pointer" }}
           >
             <span>Sign in with internet identity</span>

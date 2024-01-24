@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import React,{ JSX } from "react";
 import { CompanyProfile } from "../components/auth/CompanyProfile";
 
 const onBoardingScreen = (): JSX.Element => {
