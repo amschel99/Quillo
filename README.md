@@ -1,4 +1,5 @@
 # Tokenization Platform Documentation
+https://hwvjt-wqaaa-aaaam-qadra-cai.ic0.app/docs/current/samples/token-transfer
 
 ## Introduction
 
