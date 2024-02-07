@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Quillo",
+    "slug": "Quillo",
+    "scheme": "Quillo",
+    "platforms": ["ios", "android"],
+    "owner": "tefrotech",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#00000F"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#00000F"
+      },
+      "package": "com.tefrotech.Quillo"
+    },
+    "experiments": {
+      "tsconfigPaths": false
+    },
+    "plugins": ["expo-font", "react-native-v8"],
+    "extra": {
+      "eas": {
+        "projectId": "b4bfc127-ad57-4967-a5af-ac0332abdd59"
+      }
+    }
+  }
+}
