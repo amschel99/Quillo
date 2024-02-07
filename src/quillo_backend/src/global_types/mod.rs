@@ -1,3 +1,5 @@
+use candid::Nat;
+
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub enum Industry {
     InformationTechnology,
@@ -65,7 +67,7 @@ pub enum Class {
 }
 
 impl Class {
-    pub fn value(&self) -> u128 {
+    pub fn value(&self) -> NumTokens {
         match *self {
             Class::ClassA => 10000000,
             Class::ClassB => 50000000,
@@ -73,3 +75,4 @@ impl Class {
         }
     }
 }
+pub type NumTokens = u128;
