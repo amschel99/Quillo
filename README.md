@@ -1,4 +1,5 @@
 # Tokenization Platform Documentation
+https://hwvjt-wqaaa-aaaam-qadra-cai.ic0.app/docs/current/samples/token-transfer
 
 ## Introduction
 
@@ -85,7 +86,8 @@ To cater to companies of varying sizes, we introduce a classification system bas
 
 - Valuation Range: $50 million and above
 - Predefined Token Allocation: e.g., 20 million tokens
-
+### USEFUL
+https://support.dfinity.org/hc/en-us/articles/10899544349332-What-is-a-Service-Nervous-System-SNS
 
 ## Conclusion
 
