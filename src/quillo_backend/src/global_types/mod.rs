@@ -1,3 +1,4 @@
+mod implementations;
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub enum Industry {
     InformationTechnology,
@@ -55,4 +56,11 @@ pub enum Industry {
 pub struct Location {
     country: String,
     adress: String,
+}
+
+#[derive(candid::CandidType, Clone, Serialize, Deserialize)]
+pub enum Class {
+    ClassA,
+    ClassB,
+    ClassC,
 }
