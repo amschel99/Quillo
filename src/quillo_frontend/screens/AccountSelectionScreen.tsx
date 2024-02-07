@@ -30,35 +30,6 @@ export default function AccountSelectionScreen(): JSX.Element {
     navigation.navigate("home");
   };
 
-  const onSignIn = async (): Promise<void> => {
-    console.log("signin in...");
-
-    let authclient = await AuthClient.create();
-
-    await new Promise((resolve) => {
-      authclient.login({
-        identityProvider: "https://identity.ic0.app",
-        onSuccess() {
-          console.log("success login");
-
-          if (accType == "bns") {
-            goToCompanyProfile();
-          } else {
-            goToInvestorHome();
-          }
-        },
-        onError(error) {
-          console.log(error);
-        },
-      });
-    });
-
-    const identity: Identity = await authclient.getIdentity();
-    const agent: HttpAgent = new HttpAgent({ identity });
-
-    console.log(agent.getPrincipal());
-  };
-
   return (
     <SafeAreaView style={[screenstyle, styles.screen]}>
       <View>
@@ -140,7 +111,7 @@ export default function AccountSelectionScreen(): JSX.Element {
           />
         }
         isDisabled={accType == "" ? true : false}
-        onPressFunc={onSignIn}
+        onPressFunc={accType == "bns" ? goToCompanyProfile : goToInvestorHome}
       />
     </SafeAreaView>
   );
