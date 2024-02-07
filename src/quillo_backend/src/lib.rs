@@ -12,6 +12,7 @@ use ic_stable_structures::{
 use std::ops::Deref;
 use std::{borrow::Cow, cell::RefCell};
 mod company;
+mod dao;
 mod global_types;
 
 use company::*;
