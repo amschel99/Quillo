@@ -1,14 +1,11 @@
-#![allow(dead_code, unused_imports)]
-
-use candid::{Decode, Encode, Principal};
-use ic_cdk::api::time;
-use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
-use ic_stable_structures::{BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable};
-use std::{borrow::Cow, cell::RefCell};
-
 use crate::global_types::*;
-
+use candid::{Decode, Encode, Principal};
+use ic_stable_structures::{
+    BTreeMap, BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable,
+};
+use std::{borrow::Cow, cell::RefCell};
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
+
 pub struct CompanyInformation {
     pub id: u64,
     pub company_name: String,
@@ -50,6 +47,6 @@ impl Storable for CompanyInformation {
 }
 
 impl BoundedStorable for CompanyInformation {
-    const MAX_SIZE: u32 = 42;
-    const IS_FIXED_SIZE: bool = true;
+    const MAX_SIZE: u32 = 1024;
+    const IS_FIXED_SIZE: bool = false;
 }
