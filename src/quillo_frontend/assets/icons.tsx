@@ -116,7 +116,7 @@ export const UploadIcon = ({
   return (
     <Svg
       width={iconWidth ?? 14}
-      height={iconHeight ?? 68}
+      height={iconHeight ?? 16}
       viewBox="0 0 16 18"
       fill="none"
     >
@@ -145,6 +145,17 @@ export const LogOutIcon = (): JSX.Element => {
         stroke="white"
         stroke-width="1.5"
         stroke-linecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const LaunchIcon = (): JSX.Element => {
+  return (
+    <Svg width="10" height="10" viewBox="0 0 11 11" fill="none">
+      <Path
+        d="M2.5385 0V1.69231H8.11127L0.846191 8.95738L2.04265 10.1538L9.30773 2.88877V8.46154H11V0H2.5385Z"
+        fill="white"
       />
     </Svg>
   );

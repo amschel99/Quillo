@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     left: 0,
-    backgroundColor: "rgba(0, 0, 15, 0.85)",
+    backgroundColor: colors.primary,
   },
   confirmlogout: {
     width: SCREENWIDTH - 16,
