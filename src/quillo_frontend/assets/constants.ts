@@ -26,7 +26,7 @@ export const textlight: {
   fontFamily: string;
   color: string;
 } = {
-  fontSize: 14,
+  fontSize: 12,
   fontFamily: "ops-light",
   color: colors.text_primary,
 };
