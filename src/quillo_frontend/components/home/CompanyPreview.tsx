@@ -23,7 +23,7 @@ export const CompanyPreview = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handlePress = () => {
-    navigation.navigate("comapnydetails");
+    navigation.navigate("companyDetailsScreen", { companyId: "125623547" });
   };
 
   return (
