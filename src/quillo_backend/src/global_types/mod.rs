@@ -1,4 +1,5 @@
 use candid::Nat;
+use icrc_ledger_types::icrc1::transfer::NumTokens;
 
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub enum Industry {
@@ -67,7 +68,7 @@ pub enum Class {
 }
 
 impl Class {
-    pub fn value(&self) -> NumTokens {
+    pub fn value(&self) -> u128 {
         match *self {
             Class::ClassA => 10000000,
             Class::ClassB => 50000000,
@@ -75,4 +76,3 @@ impl Class {
         }
     }
 }
-pub type NumTokens = u128;

@@ -1,4 +1,4 @@
-use crate::global_types::*;
+use crate::{dao::types::Dao, global_types::*};
 use candid::{Decode, Encode, Principal};
 use ic_stable_structures::{
     BTreeMap, BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable,
@@ -16,14 +16,15 @@ pub struct CompanyInformation {
     pub principal: Principal,
     pub tokenization_info: CompanyTokenizationInfo,
     pub legal_info: CompanyLegalDocuments,
+    pub dao_id: Option<u64>,
 }
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub struct CompanyTokenizationInfo {
-    valuation: f64,
-    percent_to_tokenize: u8,
+    pub valuation: f64,
+    pub percent_to_tokenize: u8,
 
-    class: Class,
-    price_per_token: f64,
+    pub class: Class,
+    pub price_per_token: f64,
 }
 
 /* A file is stored as a buffer of string */
