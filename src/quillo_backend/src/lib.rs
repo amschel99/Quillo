@@ -1,7 +1,8 @@
 #![allow(dead_code, unused_variables, unused_imports)]
 #[macro_use]
 extern crate serde;
-use candid::{Decode, Encode, Principal};
+
+use candid::{Decode, Encode, Nat, Principal};
 use dao::service::InitPayload;
 
 use ic_cdk::api::time;
@@ -15,12 +16,15 @@ use std::ops::Deref;
 use std::{borrow::Cow, cell::RefCell};
 mod company;
 mod dao;
+mod dex;
 mod global_types;
 mod investor;
+mod token;
 
 use company::*;
 use dao::types::{Dao, SystemParams};
 use global_types::*;
+use token::TOKEN;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
 type IdCell = Cell<u64, Memory>;
@@ -102,8 +106,12 @@ fn _assign_dao(company: &CompanyInformation, governance_params: SystemParams) ->
         system_params: governance_params,
         total_shares: company.tokenization_info.class.value().into(),
     };
-    let created_dao = Dao::new(dao_payload);
-    //SAVE THE DAO IN THE PERMANENT STORAGE
+    let mut created_dao = Dao::new(dao_payload);
+    created_dao.token = Some(TOKEN::new(
+        ic_cdk::caller(),
+        Some(company.clone().company_name),
+    ));
+
     save_dao(created_dao);
 
     id
@@ -131,4 +139,21 @@ fn signup_investor(investor: Investor) {
 
 fn _signup_investor(investor: Investor) {
     INVESTORSTORAGE.with(|service| service.borrow_mut().insert(investor.id, investor.clone()));
+}
+#[ic_cdk::update]
+
+fn buy_tokens(amount: Nat) {
+    //TODO
+    /*
+    1. add the investor to the dao
+
+    2. Update the investments field of the investor
+
+    3. Deduct money from their wallet
+
+    4. Add money to the company's wallet
+
+
+
+     */
 }
