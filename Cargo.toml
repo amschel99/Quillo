@@ -1,4 +1,4 @@
 [workspace]
-members = [
-    "src/quillo_backend",
+members = [ "src/exchange",
+    "src/quillo_backend", "src/token_generator"
 ]
