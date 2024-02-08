@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
 import { SCREENWIDTH } from "../../assets/constants";
 import { SearchIcon } from "../../assets/icons";
