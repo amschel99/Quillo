@@ -1,11 +1,12 @@
 import { JSX } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppHeader } from "../components/global/AppHeader";
-import { Company, CompanyListView } from "../components/home/CompanyListView";
-import { colors } from "../assets/constants";
+import { company, CompanyPreview } from "../components/home/CompanyPreview";
+import { LogOut } from "../components/global/LogOut";
+import { screenstyle, textbold } from "../assets/constants";
 
-const companyListViewProps: Company[] = [
+const mycompanies: company[] = [
   {
     name: "Quillo",
     token: 3,
@@ -26,26 +27,47 @@ const companyListViewProps: Company[] = [
 export default function HomeScreen(): JSX.Element {
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <View>
-        <AppHeader renderSearch={true} />
-        <CompanyListView
-          companiesArray={companyListViewProps}
-          listTitle="My Investments"
-        />
-      </View>
-      <CompanyListView
-        companiesArray={companyListViewProps}
-        listTitle="Other Companies"
-      />
+      <AppHeader renderSearch={true} />
+
+      <ScrollView>
+        <Text style={styles.titles}>My Investments</Text>
+
+        {mycompanies.map((company, idx) => (
+          <CompanyPreview
+            key={idx}
+            name={company.name}
+            token={company.token}
+            description={company.description}
+          />
+        ))}
+
+        <Text style={styles.titles}>Other Companies</Text>
+        {mycompanies.map((company, idx) => (
+          <CompanyPreview
+            key={idx}
+            name={company.name}
+            token={company.token}
+            description={company.description}
+            isLast={idx == mycompanies.length - 1}
+          />
+        ))}
+      </ScrollView>
+
+      <LogOut />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flex: 1,
-    backgroundColor: colors.primary,
-    display: "flex",
-    gap: 24,
+    ...screenstyle,
+    paddingHorizontal: 0,
+    paddingBottom: 0,
+  },
+  titles: {
+    ...textbold,
+    marginVertical: 16,
+    paddingHorizontal: 10,
+    fontSize: 14,
   },
 });

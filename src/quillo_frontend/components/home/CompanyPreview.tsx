@@ -1,57 +1,59 @@
 import { JSX } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Company } from "./CompanyListView";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { ArrowRightIcon, LetterQicon } from "../../assets/icons";
 import { textlight, textbold, colors } from "../../assets/constants";
 
-export interface CompanyListViewProps {
-  company: Company;
-}
+export type company = {
+  name: string;
+  token: number;
+  description: string;
+  isLast?: boolean;
+};
 
 export const CompanyPreview = ({
-  company,
-}: CompanyListViewProps): JSX.Element => {
+  name,
+  token,
+  description,
+  isLast,
+}: company): JSX.Element => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={[styles.container, { marginBottom: isLast ? 54 : 6 }]}
+    >
       <View style={styles.leftSide}>
-        <Text style={{ ...textbold, fontSize: 18 }}>{company.name}</Text>
+        <Text style={{ ...textbold, fontSize: 14 }}>{name}</Text>
 
-        <View style={{ display: "flex", gap: 8 }}>
-          <Text style={textlight}>{company.token} Tokens/Share</Text>
-          <Text style={textlight}>{company.description}</Text>
+        <View style={{ gap: 8 }}>
+          <Text style={textlight}>{token} Tokens/Share</Text>
+          <Text style={textlight}>{description}</Text>
         </View>
       </View>
 
       <View style={styles.rightSide}>
-        <TouchableOpacity>
-          <LetterQicon />
-        </TouchableOpacity>
+        <Text style={[textbold, { fontSize: 32, fontWeight: "bold" }]}>
+          {name[0]}
+        </Text>
 
-        <TouchableOpacity>
-          <ArrowRightIcon />
-        </TouchableOpacity>
+        <ArrowRightIcon />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     height: 99,
+    marginVertical: 6,
     padding: 8,
-    display: "flex",
+    paddingHorizontal: 10,
     flexDirection: "row",
-    backgroundColor: colors.secondary,
     justifyContent: "space-between",
+    backgroundColor: colors.secondary,
   },
   leftSide: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 12,
+    justifyContent: "space-between",
   },
   rightSide: {
-    display: "flex",
-    flexDirection: "column",
     justifyContent: "space-between",
   },
 });
