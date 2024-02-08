@@ -2,6 +2,7 @@ type CompanyInformation = record {
   id : nat64;
   multiplier : MultiplierData;
   initial_tokens : opt float64;
+  shares_public_percent : float64;
   logo : vec nat8;
   name : text;
   registration_number : text;
