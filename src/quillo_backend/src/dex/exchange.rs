@@ -3,8 +3,9 @@ use std::collections::HashMap;
 use candid::{Nat, Principal};
 use ic_cdk::caller;
 
-use crate::types::*;
-use crate::{utils, OrderId};
+use super::types::*;
+use super::utils;
+use super::utils::*;
 
 #[derive(Default)]
 pub struct Balances(pub HashMap<Principal, HashMap<Principal, Nat>>); // owner -> token_canister_id -> amount

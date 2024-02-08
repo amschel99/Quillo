@@ -8,9 +8,14 @@ use std::collections::HashMap;
 use candid::{CandidType, Principal};
 use serde::{Deserialize, Serialize};
 
-use crate::exchange::{Balances, Exchange};
-use crate::types::*;
-use crate::{OrderId, State};
+use crate::dex::exchange::{Balances, Exchange};
+use crate::dex::types::*;
+#[derive(Default)]
+pub struct State {
+    pub owner: Option<Principal>,
+    pub ledger: Option<Principal>,
+    pub exchange: Exchange,
+}
 
 #[derive(CandidType, Clone, Deserialize, Serialize)]
 pub struct StableOrder {
