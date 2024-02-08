@@ -1,10 +1,10 @@
 use std::borrow::Cow;
 
+use super::super::token::TOKEN;
 use crate::global_types::*;
 use candid::{CandidType, Decode, Encode, Principal};
 use ic_stable_structures::{BoundedStorable, Storable};
 use icrc_ledger_types::icrc1::{account::Account, transfer::NumTokens};
-
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 
 pub struct Dao {
@@ -13,6 +13,7 @@ pub struct Dao {
     pub id: u64,
     pub system_params: SystemParams,
     pub proposals: Option<Vec<Proposal>>,
+    pub token: Option<TOKEN>,
 }
 
 impl Storable for Dao {

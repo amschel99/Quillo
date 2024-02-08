@@ -8,16 +8,9 @@ use ic_ledger_types::{
     AccountIdentifier, Memo, Tokens, DEFAULT_SUBACCOUNT, MAINNET_LEDGER_CANISTER_ID,
 };
 
-mod dip20;
-mod exchange;
-mod stable;
-mod types;
-mod utils;
-
-use dip20::DIP20;
-use exchange::Exchange;
-use types::*;
-use utils::principal_to_subaccount;
+use super::exchange::*;
+use super::utils::*;
+use super::TOKEN;
 
 const ICP_FEE: u64 = 10_000;
 
@@ -94,7 +87,7 @@ async fn deposit_icp(caller: Principal) -> Result<Nat, DepositErr> {
 }
 
 async fn deposit_token(caller: Principal, token: Principal) -> Result<Nat, DepositErr> {
-    let token = DIP20::new(token);
+    let token = TOKEN::new(token, None);
     let dip_fee = token.get_metadata().await.fee;
 
     let allowance = token.allowance(caller, ic_cdk::api::id()).await;
@@ -158,7 +151,10 @@ pub async fn get_symbol(token_canister_id: Principal) -> String {
     if token_canister_id == ledger_canister_id {
         "ICP".to_string()
     } else {
-        DIP20::new(token_canister_id).get_metadata().await.symbol
+        TOKEN::new(token_canister_id, None)
+            .get_metadata()
+            .await
+            .symbol
     }
 }
 
@@ -275,7 +271,7 @@ async fn withdraw_token(
     address: Principal,
 ) -> Result<Nat, WithdrawErr> {
     let caller = caller();
-    let dip = DIP20::new(token);
+    let dip = TOKEN::new(token, None);
     let dip_fee = dip.get_metadata().await.fee;
 
     let sufficient_balance = STATE.with(|s| {
