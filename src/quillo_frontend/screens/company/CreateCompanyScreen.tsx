@@ -81,9 +81,9 @@ export default function CreateCompanyScreen(): JSX.Element {
   const [companyValuation, setCompanyValuation] = useState<string>("");
   const [tokenizeAmnt, setTokenizeAmnt] = useState<string>("");
   const [walletAddress, setWalletAddress] = useState<string>("");
-  const [registrationCert, setRegistrationCert] = useState<Blob>(null);
-  const [taxInfo, setTaxInfo] = useState<Blob>(null);
-  const [incInfo, setIncInfo] = useState<Blob>(null);
+  const [registrationCert, setRegistrationCert] = useState<Blob>();
+  const [taxInfo, setTaxInfo] = useState<Blob>();
+  const [incInfo, setIncInfo] = useState<Blob>();
 
   const navigation: NativeStackNavigationProp<RootStackParamList> =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();

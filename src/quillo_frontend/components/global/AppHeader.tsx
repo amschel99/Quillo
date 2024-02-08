@@ -1,7 +1,7 @@
 import { JSX } from "react";
-import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
-import { SCREENWIDTH } from "../../assets/constants";
+import { StyleSheet, TouchableOpacity, Image, View } from "react-native";
 import { SearchIcon } from "../../assets/icons";
+import { SCREENWIDTH } from "../../assets/constants";
 
 interface headerProps {
   renderSearch: boolean;

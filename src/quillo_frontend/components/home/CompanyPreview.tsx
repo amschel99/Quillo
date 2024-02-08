@@ -1,4 +1,4 @@
-import React from "react";
+import { JSX } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Company } from "./CompanyListView";
 import { ArrowRightIcon, LetterQicon } from "../../assets/icons";
@@ -15,18 +15,18 @@ export const CompanyPreview = ({
     <View style={styles.container}>
       <View style={styles.leftSide}>
         <Text style={{ ...textbold, fontSize: 18 }}>{company.name}</Text>
+
         <View style={{ display: "flex", gap: 8 }}>
-          <Text style={{ ...textlight }}>
-            {company.token}
-            {" Tokens/Share"}
-          </Text>
-          <Text style={{ ...textlight }}>{company.description}</Text>
+          <Text style={textlight}>{company.token} Tokens/Share</Text>
+          <Text style={textlight}>{company.description}</Text>
         </View>
       </View>
+
       <View style={styles.rightSide}>
         <TouchableOpacity>
           <LetterQicon />
         </TouchableOpacity>
+
         <TouchableOpacity>
           <ArrowRightIcon />
         </TouchableOpacity>

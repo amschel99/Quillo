@@ -1,9 +1,9 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AppHeader } from "../components/global/AppHeader";
-import { colors } from "../assets/constants";
 import { Company, CompanyListView } from "../components/home/CompanyListView";
+import { colors } from "../assets/constants";
 
 const companyListViewProps: Company[] = [
   {

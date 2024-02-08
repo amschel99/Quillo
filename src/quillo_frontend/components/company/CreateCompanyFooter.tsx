@@ -1,4 +1,4 @@
-import React from "react";
+import { JSX } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { ArrowLeftIcon, ArrowRightIcon } from "../../assets/icons";
 import { colors, textbold } from "../../assets/constants";
@@ -17,7 +17,7 @@ export const CreateCompanyFooter = ({
   footerContent,
   onPressNext,
   onPressPrev,
-}: footerProps) => {
+}: footerProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.actionsctr}>

@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { JSX } from "react";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { CompanyPreview } from "./CompanyPreview";
 import { SCREENHEIGH, textbold } from "../../assets/constants";
 
@@ -8,6 +8,7 @@ export interface Company {
   token: number;
   description: string;
 }
+
 export interface CompanyListViewProps {
   listTitle: string;
   companiesArray: Company[];
@@ -20,6 +21,7 @@ export const CompanyListView = ({
   return (
     <View style={styles.container}>
       <Text style={{ ...textbold, fontSize: 18 }}>{listTitle}</Text>
+
       <ScrollView style={styles.companyListContainer}>
         {companiesArray.map((company, index) => (
           <View key={index} style={styles.company}>
