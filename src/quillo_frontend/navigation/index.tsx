@@ -4,6 +4,7 @@ import SplashScreen from "../screens/SplashScreen";
 import AccountSelectionScreen from "../screens/AccountSelectionScreen";
 import HomeScreen from "../screens/HomeScreen";
 /**company */
+import CompanyHomeScreen from "../screens/company/CompanyHome";
 import CompanyProfileScreen from "../screens/company/CompanyProfile";
 import CreateCompanyScreen from "../screens/company/CreateCompanyScreen";
 import UpdateCompanyScreen from "../screens/company/UpdateCompanyScreen";
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   splash: undefined;
   accountselection: undefined;
   createcompany: undefined;
+  companyhome: undefined;
   mycompanyprofile: undefined;
   updatecompanyprofile: undefined;
   searchcompanies: undefined;
@@ -40,6 +42,7 @@ export const Navigation = (): JSX.Element => {
         name="accountselection"
         component={AccountSelectionScreen}
       />
+      <Stack.Screen name="companyhome" component={CompanyHomeScreen} />
       <Stack.Screen name="createcompany" component={CreateCompanyScreen} />
       <Stack.Screen name="mycompanyprofile" component={CompanyProfileScreen} />
       <Stack.Screen
