@@ -31,7 +31,6 @@ export default function InvestorHomeScreen(): JSX.Element {
 
       <ScrollView>
         <Text style={styles.titles}>My Investments</Text>
-
         {mycompanies.map((company, idx) => (
           <CompanyPreview
             key={idx}

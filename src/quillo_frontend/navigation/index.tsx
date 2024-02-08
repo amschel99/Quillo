@@ -21,7 +21,7 @@ export type RootStackParamList = {
   updatecompanyprofile: undefined;
   searchcompanies: undefined;
   investorHomeScreen: undefined;
-  companyDetailsScreen: undefined;
+  companyDetailsScreen: { companyId: string | null };
   buyshares: undefined;
   home: undefined;
 };
@@ -54,6 +54,7 @@ export const Navigation = (): JSX.Element => {
       <Stack.Screen
         name="companyDetailsScreen"
         component={CompanyDetailsScreen}
+        initialParams={{ companyId: null }}
       />
       <Stack.Screen name="home" component={HomeScreen} />
     </Stack.Navigator>
