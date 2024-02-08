@@ -21,7 +21,7 @@ pub struct CompanyInformation {
 pub struct CompanyTokenizationInfo {
     valuation: f64,
     percent_to_tokenize: u8,
-    tokens: u128,
+
     class: Class,
     price_per_token: f64,
 }

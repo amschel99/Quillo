@@ -16,6 +16,7 @@ mod dao;
 mod global_types;
 
 use company::*;
+use dao::types::Dao;
 use global_types::*;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
@@ -35,6 +36,13 @@ static COMPANYSTORAGE: RefCell<StableBTreeMap<u64, CompanyInformation, Memory>> 
         RefCell::new(StableBTreeMap::init(
             MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1)))
     ));
+
+    static DAOSTORAGE: RefCell<StableBTreeMap<u64, Dao, Memory>> =
+        RefCell::new(StableBTreeMap::init(
+            MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1)))
+    ));
+
+
 
 
 
