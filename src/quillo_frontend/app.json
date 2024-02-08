@@ -28,7 +28,7 @@
     "experiments": {
       "tsconfigPaths": false
     },
-    "plugins": ["expo-font", "react-native-v8"],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "b4bfc127-ad57-4967-a5af-ac0332abdd59"
