@@ -2,6 +2,7 @@ import { Dimensions } from "react-native";
 
 export enum colors {
   primary = "#00000F",
+  secondary = "rgba(248, 250, 252, 0.1)",
   text_primary = "#FFFFFF",
   text_secondary = "#7F7F7F",
   divider = "rgba(248, 250, 252, 0.1)",
