@@ -20,6 +20,6 @@ syn = "1.0"
 quote = "1.0"
 num-bigint = "0.4"
 num-traits = "0.2.14"
-ic-cdk-macros="0.8.4"
+ic-ledger-types="0.7.0"
 
 

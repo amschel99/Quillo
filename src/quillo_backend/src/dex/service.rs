@@ -3,14 +3,21 @@ use std::convert::TryInto;
 
 use candid::{candid_method, export_service, Nat, Principal};
 use ic_cdk::caller;
-use ic_cdk_macros::*;
+
 use ic_ledger_types::{
     AccountIdentifier, Memo, Tokens, DEFAULT_SUBACCOUNT, MAINNET_LEDGER_CANISTER_ID,
 };
 
-use super::exchange::*;
+use crate::dex::types::WithdrawErr;
+
+use super::stable::State;
+use super::types::{
+    Balance, CancelOrderReceipt, DepositErr, DepositReceipt, Order, OrderId, OrderPlacementReceipt,
+    WithdrawReceipt,
+};
 use super::utils::*;
 use super::TOKEN;
+use super::{exchange::*, stable};
 
 const ICP_FEE: u64 = 10_000;
 
@@ -18,14 +25,7 @@ thread_local! {
     static STATE: RefCell<State> = RefCell::new(State::default());
 }
 
-#[derive(Default)]
-pub struct State {
-    owner: Option<Principal>,
-    ledger: Option<Principal>,
-    exchange: Exchange,
-}
-
-#[update]
+#[ic_cdk::update]
 #[candid_method(update)]
 pub async fn deposit(token_canister_id: Principal) -> DepositReceipt {
     let caller = caller();
@@ -102,37 +102,37 @@ async fn deposit_token(caller: Principal, token: Principal) -> Result<Nat, Depos
     Ok(available)
 }
 
-#[query(name = "getBalance")]
+#[ic_cdk::query(name = "getBalance")]
 #[candid_method(query, rename = "getBalance")]
 pub fn get_balance(token_canister_id: Principal) -> Nat {
     STATE.with(|s| s.borrow().exchange.get_balance(token_canister_id))
 }
 
-#[query(name = "getBalances")]
+#[ic_cdk::query(name = "getBalances")]
 #[candid_method(query, rename = "getBalances")]
 pub fn get_balances() -> Vec<Balance> {
     STATE.with(|s| s.borrow().exchange.get_balances())
 }
 
-#[query(name = "getAllBalances")]
+#[ic_cdk::query(name = "getAllBalances")]
 #[candid_method(query, rename = "getAllBalances")]
 pub fn get_all_balances() -> Vec<Balance> {
     STATE.with(|s| s.borrow().exchange.get_all_balances())
 }
 
-#[update(name = "getOrder")]
+#[ic_cdk::update(name = "getOrder")]
 #[candid_method(update, rename = "getOrder")]
 pub fn get_order(order: OrderId) -> Option<Order> {
     STATE.with(|s| s.borrow().exchange.get_order(order))
 }
 
-#[update(name = "getOrders")]
+#[ic_cdk::update(name = "getOrders")]
 #[candid_method(update, rename = "getOrders")]
 pub fn get_orders() -> Vec<Order> {
     STATE.with(|s| s.borrow().exchange.get_all_orders())
 }
 
-#[update(name = "getDepositAddress")]
+#[ic_cdk::update(name = "getDepositAdress")]
 #[candid_method(update, rename = "getDepositAddress")]
 pub fn get_deposit_address() -> AccountIdentifier {
     let canister_id = ic_cdk::api::id();
@@ -141,7 +141,7 @@ pub fn get_deposit_address() -> AccountIdentifier {
     AccountIdentifier::new(&canister_id, &subaccount)
 }
 
-#[update(name = "getSymbol")]
+#[ic_cdk::update(name = "getSymbol")]
 #[candid_method(update, rename = "getSymbol")]
 pub async fn get_symbol(token_canister_id: Principal) -> String {
     let ledger_canister_id = STATE
@@ -158,7 +158,7 @@ pub async fn get_symbol(token_canister_id: Principal) -> String {
     }
 }
 
-#[update(name = "placeOrder")]
+#[ic_cdk::update(name = "placeOrder")]
 #[candid_method(update, rename = "placeOrder")]
 pub fn place_order(
     from_token_canister_id: Principal,
@@ -176,13 +176,13 @@ pub fn place_order(
     })
 }
 
-#[update(name = "cancelOrder")]
+#[ic_cdk::update(name = "cancelOrder")]
 #[candid_method(update, rename = "cancelOrder")]
 pub fn cancel_order(order: OrderId) -> CancelOrderReceipt {
     STATE.with(|s| s.borrow_mut().exchange.cancel_order(order))
 }
 
-#[update]
+#[ic_cdk::update]
 #[candid_method(update)]
 pub async fn withdraw(
     token_canister_id: Principal,
@@ -305,14 +305,14 @@ async fn withdraw_token(
     Ok(amount.to_owned() + dip_fee)
 }
 
-#[query]
+#[ic_cdk::query]
 #[candid_method(query)]
 pub fn whoami() -> Principal {
     caller()
 }
 
 // For testing
-#[update]
+#[ic_cdk::update]
 #[candid_method(oneway)]
 pub fn credit(user: Principal, token_canister_id: Principal, amount: Nat) {
     STATE.with(|s| {
@@ -329,7 +329,7 @@ pub fn credit(user: Principal, token_canister_id: Principal, amount: Nat) {
 }
 
 // For testing.
-#[update]
+#[ic_cdk::update]
 #[candid_method(oneway)]
 pub fn clear() {
     STATE.with(|s| {
@@ -341,7 +341,7 @@ pub fn clear() {
     })
 }
 
-#[init]
+#[ic_cdk::init]
 fn init(ledger: Option<Principal>) {
     ic_cdk::setup();
     STATE.with(|s| {
@@ -354,7 +354,7 @@ fn init(ledger: Option<Principal>) {
 // If the state becomes too large, it can prevent future upgrades. This
 // is left in as a tool during development. If removed, native types
 // can be used throughout, instead.
-#[pre_upgrade]
+#[ic_cdk::pre_upgrade]
 fn pre_upgrade() {
     let state = STATE.with(|s| s.take());
 
@@ -368,7 +368,7 @@ fn pre_upgrade() {
 // If the state becomes too large, it can prevent future upgrades. This
 // is left in as a tool during development. If removed, native types
 // can be used throughout, instead.
-#[post_upgrade]
+#[ic_cdk::post_upgrade]
 fn post_upgrade() {
     let (stable_state,): (stable::StableState,) =
         ic_cdk::storage::stable_restore().expect("failed to restore stable state");
@@ -379,11 +379,4 @@ fn post_upgrade() {
     STATE.with(|s| {
         s.replace(state);
     });
-}
-
-export_service!();
-
-#[ic_cdk_macros::query(name = "__get_candid_interface_tmp_hack")]
-fn export_candid() -> String {
-    __export_service()
 }
