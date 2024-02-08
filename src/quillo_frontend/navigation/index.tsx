@@ -10,7 +10,9 @@ import CreateCompanyScreen from "../screens/company/CreateCompanyScreen";
 import UpdateCompanyScreen from "../screens/company/UpdateCompanyScreen";
 /**investor */
 import BuySharesScreen from "../screens/investor/BuySharesScreen";
+import InvestorHomeScreen from "../screens/investor/InvestorHomeScreen";
 import SearchScreen from "../screens/investor/SearchScreen";
+import CompanyDetailsScreen from "../screens/investor/CompanyDetailsScreen";
 
 export type RootStackParamList = {
   splash: undefined;
@@ -20,8 +22,9 @@ export type RootStackParamList = {
   mycompanyprofile: undefined;
   updatecompanyprofile: undefined;
   searchcompanies: undefined;
-  comapnydetails: undefined;
-  buyshares: { companyId: string | null };
+  investorHomeScreen: undefined;
+  companyDetailsScreen: { companyId: string | null };
+  buyshares: undefined;
   home: undefined;
 };
 
@@ -49,7 +52,13 @@ export const Navigation = (): JSX.Element => {
         component={UpdateCompanyScreen}
       />
       <Stack.Screen name="searchcompanies" component={SearchScreen} />
+      <Stack.Screen name="investorHomeScreen" component={InvestorHomeScreen} />
       <Stack.Screen name="buyshares" component={BuySharesScreen} />
+      <Stack.Screen
+        name="companyDetailsScreen"
+        component={CompanyDetailsScreen}
+        initialParams={{ companyId: null }}
+      />
       <Stack.Screen name="home" component={HomeScreen} />
     </Stack.Navigator>
   );

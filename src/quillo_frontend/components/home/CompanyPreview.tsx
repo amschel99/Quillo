@@ -1,7 +1,10 @@
 import { JSX } from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import { ArrowRightIcon, LetterQicon } from "../../assets/icons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { ArrowRightIcon } from "../../assets/icons";
 import { textlight, textbold, colors } from "../../assets/constants";
+import { RootStackParamList } from "navigation";
 
 export type company = {
   name: string;
@@ -16,9 +19,17 @@ export const CompanyPreview = ({
   description,
   isLast,
 }: company): JSX.Element => {
+  const navigation: NativeStackNavigationProp<RootStackParamList> =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handlePress = () => {
+    navigation.navigate("companyDetailsScreen");
+  };
+
   return (
     <TouchableOpacity
       style={[styles.container, { marginBottom: isLast ? 54 : 6 }]}
+      onPress={handlePress}
     >
       <View style={styles.leftSide}>
         <Text style={{ ...textbold, fontSize: 14 }}>{name}</Text>

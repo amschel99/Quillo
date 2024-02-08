@@ -40,6 +40,11 @@ export const textlightfaint: {
   color: colors.text_secondary,
 };
 
+export const textlightfaintbold = {
+  ...textlightfaint,
+  fontFamily: "ops-regular",
+};
+
 export const textbold: {
   fontSize: number;
   fontFamily: string;

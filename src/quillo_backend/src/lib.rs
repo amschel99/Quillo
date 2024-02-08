@@ -1,24 +1,30 @@
 #![allow(dead_code, unused_variables, unused_imports)]
 #[macro_use]
 extern crate serde;
-use candid::{Decode, Encode, Principal};
+
+use candid::{Decode, Encode, Nat, Principal};
 use dao::service::InitPayload;
-//use company::CompanyInformation;
+
 use ic_cdk::api::time;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{
     BTreeMap, BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable,
 };
+use investor::types::Investor;
 
 use std::ops::Deref;
 use std::{borrow::Cow, cell::RefCell};
 mod company;
 mod dao;
+mod dex;
 mod global_types;
+mod investor;
+mod token;
 
 use company::*;
 use dao::types::{Dao, SystemParams};
 use global_types::*;
+use token::TOKEN;
 
 type Memory = VirtualMemory<DefaultMemoryImpl>;
 type IdCell = Cell<u64, Memory>;
@@ -42,6 +48,10 @@ static COMPANYSTORAGE: RefCell<StableBTreeMap<u64, CompanyInformation, Memory>> 
         RefCell::new(StableBTreeMap::init(
             MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1)))
     ));
+    static INVESTORSTORAGE: RefCell<StableBTreeMap<u64, Investor, Memory>> =
+    RefCell::new(StableBTreeMap::init(
+        MEMORY_MANAGER.with(|m| m.borrow().get(MemoryId::new(1)))
+));
 
 
 
@@ -96,8 +106,12 @@ fn _assign_dao(company: &CompanyInformation, governance_params: SystemParams) ->
         system_params: governance_params,
         total_shares: company.tokenization_info.class.value().into(),
     };
-    let created_dao = Dao::new(dao_payload);
-    //SAVE THE DAO IN THE PERMANENT STORAGE
+    let mut created_dao = Dao::new(dao_payload);
+    created_dao.token = Some(TOKEN::new(
+        ic_cdk::caller(),
+        Some(company.clone().company_name),
+    ));
+
     save_dao(created_dao);
 
     id
@@ -106,4 +120,40 @@ fn _assign_dao(company: &CompanyInformation, governance_params: SystemParams) ->
 #[ic_cdk::update]
 fn save_dao(dao: Dao) {
     DAOSTORAGE.with(|service| service.borrow_mut().insert(dao.id, dao.clone()));
+}
+#[ic_cdk::update]
+
+fn signup_investor(investor: Investor) {
+    let id = ID_COUNTER.with(|counter| {
+        let counter_value = *counter.borrow().get();
+        let _ = counter.borrow_mut().set(counter_value + 1);
+        counter_value
+    });
+    let investor = Investor {
+        id,
+        investments: None,
+        principal: ic_cdk::caller(),
+    };
+    _signup_investor(investor);
+}
+
+fn _signup_investor(investor: Investor) {
+    INVESTORSTORAGE.with(|service| service.borrow_mut().insert(investor.id, investor.clone()));
+}
+#[ic_cdk::update]
+
+fn buy_tokens(amount: Nat) {
+    //TODO
+    /*
+    1. add the investor to the dao
+
+    2. Update the investments field of the investor
+
+    3. Deduct money from their wallet
+
+    4. Add money to the company's wallet
+
+
+
+     */
 }
