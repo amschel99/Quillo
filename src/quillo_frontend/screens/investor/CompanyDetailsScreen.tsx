@@ -1,6 +1,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "navigation";
+import { AppHeader } from "../../components/global/AppHeader";
+import { Button } from "../../components/global/Button";
 import {
   screenstyle,
   textbold,
@@ -8,10 +12,6 @@ import {
   textlight,
   textlightfaintbold,
 } from "../../assets/constants";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "navigation";
-import { AppHeader } from "../../components/global/AppHeader";
-import { Button } from "../../components/global/Button";
 import { ArrowRightIcon } from "../../assets/icons";
 
 type CompanyDetailsScreenProps = NativeStackScreenProps<
