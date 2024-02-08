@@ -12,6 +12,7 @@ import UpdateCompanyScreen from "../screens/company/UpdateCompanyScreen";
 import BuySharesScreen from "../screens/investor/BuySharesScreen";
 import InvestorHomeScreen from "../screens/investor/InvestorHomeScreen";
 import SearchScreen from "../screens/investor/SearchScreen";
+import CompanyDetailsScreen from "../screens/investor/CompanyDetailsScreen";
 
 export type RootStackParamList = {
   splash: undefined;
