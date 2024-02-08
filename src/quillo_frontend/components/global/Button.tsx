@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { colors, textlight, textlightfaint } from "../../assets/constants";
 

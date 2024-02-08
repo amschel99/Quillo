@@ -1,4 +1,4 @@
-import React, { JSX, useCallback } from "react";
+import { JSX, useCallback } from "react";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";

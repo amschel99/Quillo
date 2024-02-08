@@ -1,10 +1,8 @@
-import React, { JSX, useState } from "react";
+import { JSX, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AuthClient } from "@dfinity/auth-client";
-import { HttpAgent, Identity } from "@dfinity/agent";
 import { RootStackParamList } from "../navigation";
 import { AppHeader } from "../components/global/AppHeader";
 import { Button } from "../components/global/Button";
