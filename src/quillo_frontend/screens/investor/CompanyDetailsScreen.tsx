@@ -24,6 +24,11 @@ export default function CompanyDetailsScreen({
   navigation,
 }: CompanyDetailsScreenProps): JSX.Element {
   const { companyId } = route.params;
+
+  const handlePress = () => {
+    navigation.navigate("buyshares");
+  };
+
   return (
     <SafeAreaView style={styles.screenContainer}>
       <ScrollView>
@@ -109,7 +114,7 @@ export default function CompanyDetailsScreen({
           dpText={"Get Quillo Shares"}
           dpIcon={<ArrowRightIcon />}
           isDisabled={false}
-          onPressFunc={() => {}}
+          onPressFunc={handlePress}
           xstyles={{ borderRadius: 0 }}
         />
       </ScrollView>
