@@ -21,7 +21,7 @@ export type RootStackParamList = {
   updatecompanyprofile: undefined;
   searchcompanies: undefined;
   comapnydetails: undefined;
-  buyshares: undefined;
+  buyshares: { companyId: string | null };
   home: undefined;
 };
 
