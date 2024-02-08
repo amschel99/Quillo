@@ -81,17 +81,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     left: 0,
-    backgroundColor: colors.primary,
   },
   confirmlogout: {
     width: SCREENWIDTH - 16,
     marginBottom: 8,
     paddingTop: 10,
     alignSelf: "center",
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderRadius: 6,
     borderColor: colors.divider,
-    backgroundColor: colors.divider,
+    backgroundColor: "rgba(50, 50, 50, 0.85)",
   },
   actionsctr: {
     width: "100%",
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 6,
     borderBottomLeftRadius: 6,
     borderTopColor: colors.divider,
-    backgroundColor: colors.divider,
+    backgroundColor: colors.primary,
   },
   action: {
     padding: 8,
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderTopWidth: 0.5,
     borderTopColor: colors.divider,
-    backgroundColor: colors.divider,
+    backgroundColor: colors.primary,
   },
   logout: {
     width: 180,
@@ -134,6 +133,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     borderColor: colors.divider,
-    backgroundColor: colors.divider,
+    backgroundColor: colors.divider_faint,
   },
 });
