@@ -10,7 +10,6 @@ import CreateCompanyScreen from "../screens/company/CreateCompanyScreen";
 import UpdateCompanyScreen from "../screens/company/UpdateCompanyScreen";
 /**investor */
 import BuySharesScreen from "../screens/investor/BuySharesScreen";
-import CompanyDetailsScreen from "../screens/investor/CompanyDetailsScreen";
 import SearchScreen from "../screens/investor/SearchScreen";
 
 export type RootStackParamList = {
@@ -50,7 +49,6 @@ export const Navigation = (): JSX.Element => {
         component={UpdateCompanyScreen}
       />
       <Stack.Screen name="searchcompanies" component={SearchScreen} />
-      <Stack.Screen name="comapnydetails" component={CompanyDetailsScreen} />
       <Stack.Screen name="buyshares" component={BuySharesScreen} />
       <Stack.Screen name="home" component={HomeScreen} />
     </Stack.Navigator>
