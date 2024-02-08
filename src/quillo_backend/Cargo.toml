@@ -20,5 +20,6 @@ syn = "1.0"
 quote = "1.0"
 num-bigint = "0.4"
 num-traits = "0.2.14"
-token_generator={path="../token_generator"}
+ic-ledger-types="0.7.0"
+
 

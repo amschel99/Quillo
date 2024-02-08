@@ -42,24 +42,17 @@ const classes: { class: string; tokens: string; desc: string }[] = [
   {
     class: "Class A -- Small Company",
     tokens: "10,000,000",
-    desc: `Class A is suitable for small companies with a valuation up to 100,000,000 USD
-    This class offers a token allocation of 10,000,000 tokens, facilitating easy fundraising and investment accessibility`,
+    desc: `* Class A is suitable for small companies with a valuation up to 100,000,000 USD. This class offers a token allocation of 10,000,000 tokens, facilitating easy fundraising and investment accessibility`,
   },
   {
     class: "Class B -- Medium sized Company",
     tokens: "50,000,000",
-    desc: `
-      Class B is tailored for medium-sized companies with a valuation between 500,000,000 USD
-      With a token allocation of 50,000,000 tokens, this class opens doors to broader investment opportunities and capital influx
-    `,
+    desc: `* Class B is tailored for medium-sized companies with a valuation between 500,000,000 USD With a token allocation of 50,000,000 tokens, this class opens doors to broader investment opportunities and capital influx`,
   },
   {
     class: "C -- Large Company",
     tokens: "100,000,000",
-    desc: `
-      Class C is designed for large companies with a valuation exceeding 1,000,000,000 USD
-      Offering a token allocation of 100,000,000 tokens, this class enables significant fundraising capabilities and access to diverse investor pools
-    `,
+    desc: `* Class C is designed for large companies with a valuation exceeding 1,000,000,000 USD Offering a token allocation of 100,000,000 tokens, this class enables significant fundraising capabilities and access to diverse investor pools`,
   },
 ];
 
@@ -89,7 +82,7 @@ export default function CreateCompanyScreen(): JSX.Element {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const goToHomeScreen = (): void => {
-    navigation.navigate("home");
+    navigation.navigate("companyhome");
   };
 
   const pressPrevBtn = (): void => {
@@ -266,7 +259,7 @@ export default function CreateCompanyScreen(): JSX.Element {
               </Text>
 
               <Text style={[textlightfaint, { marginTop: 8 }]}>
-                * {classes[classId].class}
+                * Class {classes[classId].class}
               </Text>
               <Text style={[textlightfaint, { marginTop: 8 }]}>
                 * Token Allocation -- {classes[classId].tokens} Tokens
@@ -274,7 +267,7 @@ export default function CreateCompanyScreen(): JSX.Element {
               <Text
                 style={[textlightfaint, { marginTop: 8, textAlign: "justify" }]}
               >
-                * {classes[classId].desc}
+                {classes[classId].desc}
               </Text>
             </>
           )}
@@ -340,7 +333,7 @@ const styles = StyleSheet.create({
   touchable: {
     marginTop: 12,
     padding: 8,
-    paddingVertical: 10,
+    // paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

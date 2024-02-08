@@ -12,6 +12,7 @@ impl Dao {
             id: payload.id,
             system_params: payload.system_params,
             total_shares: payload.total_shares,
+            token: None,
         }
     }
 }
