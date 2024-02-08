@@ -2,9 +2,9 @@ import { JSX } from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import { ArrowRightIcon } from "../../assets/icons";
+import { RootStackParamList } from "../../navigation";
 import { textlight, textbold, colors } from "../../assets/constants";
-import { RootStackParamList } from "navigation";
+import { ArrowRightIcon } from "../../assets/icons";
 
 export type company = {
   name: string;
@@ -23,7 +23,7 @@ export const CompanyPreview = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handlePress = () => {
-    navigation.navigate("companyDetailsScreen");
+    navigation.navigate("comapnydetails");
   };
 
   return (
