@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, textbold } from "../../assets/constants";
 import { BackSpaceIcon } from "../../assets/icons";
 
