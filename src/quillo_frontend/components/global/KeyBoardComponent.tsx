@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { colors, textbold } from "../../assets/constants";
+import { BackSpaceIcon } from "../../assets/icons";
 
 export const KeyBoardComponent = (): JSX.Element => {
   return (
@@ -44,7 +45,7 @@ export const KeyBoardComponent = (): JSX.Element => {
           <Text style={textbold}>.</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.item}>
-          <Text style={textbold}>back</Text>
+          <BackSpaceIcon />
         </TouchableOpacity>
       </View>
     </View>

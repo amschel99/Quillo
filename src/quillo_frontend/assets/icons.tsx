@@ -160,3 +160,23 @@ export const LaunchIcon = (): JSX.Element => {
     </Svg>
   );
 };
+
+export const BackSpaceIcon = ({
+  iconWidth,
+  iconHeight,
+  iconColor,
+}: iconProps): JSX.Element => {
+  return (
+    <Svg
+      width={iconWidth ?? 24}
+      height={iconHeight ?? 18}
+      viewBox="0 0 24 18"
+      fill="none"
+    >
+      <Path
+        d="M19 12.59L17.59 14L14 10.41L10.41 14L9 12.59L12.59 9L9 5.41L10.41 4L14 7.59L17.59 4L19 5.41L15.41 9L19 12.59ZM22 0C22.5304 0 23.0391 0.210714 23.4142 0.585786C23.7893 0.960859 24 1.46957 24 2V16C24 16.5304 23.7893 17.0391 23.4142 17.4142C23.0391 17.7893 22.5304 18 22 18H7C6.31 18 5.77 17.64 5.41 17.11L0 9L5.41 0.88C5.77 0.35 6.31 0 7 0H22ZM22 2H7L2.28 9L7 16H22V2Z"
+        fill={iconColor ?? "#7F7F7F"}
+      />
+    </Svg>
+  );
+};
