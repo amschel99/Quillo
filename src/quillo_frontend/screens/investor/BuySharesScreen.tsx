@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation";
 import { AppHeader } from "../../components/global/AppHeader";
+import { KeyBoardComponent } from "../../components/global/KeyBoardComponent";
 import { screenstyle, textbold } from "../../assets/constants";
 
 type buysharesProps = NativeStackScreenProps<RootStackParamList, "buyshares">;
@@ -22,6 +23,7 @@ export default function BuySharesScreen({
 
       <ScrollView>
         <Text style={textbold}>Get Quillo Shares</Text>
+        <KeyBoardComponent />
       </ScrollView>
     </SafeAreaView>
   );
