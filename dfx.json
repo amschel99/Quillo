@@ -4,7 +4,7 @@
       "candid": "src/quillo_backend/quillo_backend.did",
       "package": "quillo_backend",
       "type": "rust"
-    },
+    }
    
   },
   "defaults": {
