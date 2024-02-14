@@ -25,6 +25,8 @@ thread_local! {
     static STATE: RefCell<State> = RefCell::new(State::default());
 }
 
+pub struct Type {}
+
 #[ic_cdk::update]
 #[candid_method(update)]
 pub async fn deposit(token_canister_id: Principal) -> DepositReceipt {

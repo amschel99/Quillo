@@ -2,10 +2,11 @@
 #[macro_use]
 extern crate serde;
 
-use candid::{Decode, Encode, Nat, Principal};
+use candid::{candid_method, Decode, Encode, Nat, Principal};
 use dao::service::InitPayload;
 
 use ic_cdk::api::time;
+use ic_ledger_types::AccountIdentifier;
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{
     BTreeMap, BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable,
@@ -20,9 +21,9 @@ mod dex;
 mod global_types;
 mod investor;
 mod token;
-
 use company::*;
 use dao::types::{Dao, SystemParams};
+use dex::service::*;
 use global_types::*;
 use token::TOKEN;
 
@@ -156,4 +157,7 @@ fn buy_tokens(amount: Nat) {
 
 
      */
+    //   place_order(from_token_canister_id, from_amount, to_token_canister_id, to_amount)
 }
+
+ic_cdk::export_candid!();
