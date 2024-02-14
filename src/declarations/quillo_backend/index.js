@@ -40,4 +40,4 @@ export const createActor = (canisterId, options = {}) => {
   });
 };
 
-export const quillo_backend = createActor(canisterId);
+export const quillo_backend = canisterId ? createActor(canisterId) : undefined;
