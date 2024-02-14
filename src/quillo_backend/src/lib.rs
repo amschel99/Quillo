@@ -24,6 +24,7 @@ mod token;
 use company::*;
 use dao::types::{Dao, SystemParams};
 use dex::service::*;
+use dex::types::*;
 use global_types::*;
 use token::TOKEN;
 
