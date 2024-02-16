@@ -6,12 +6,13 @@ use candid::{candid_method, Decode, Encode, Nat, Principal};
 use dao::service::InitPayload;
 
 use ic_cdk::api::time;
-use ic_ledger_types::AccountIdentifier;
+use ic_ledger_types::{AccountIdentifier, MAINNET_LEDGER_CANISTER_ID};
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
 use ic_stable_structures::{
     BTreeMap, BoundedStorable, Cell, DefaultMemoryImpl, StableBTreeMap, Storable,
 };
 use investor::types::Investor;
+use num_traits::ToPrimitive;
 
 use std::ops::Deref;
 use std::{borrow::Cow, cell::RefCell};
@@ -144,21 +145,70 @@ fn _signup_investor(investor: Investor) {
 }
 #[ic_cdk::update]
 
-fn buy_tokens(amount: Nat) {
-    //TODO
-    /*
-    1. add the investor to the dao
+fn buy_tokens(amount: Nat, company_id: u64) -> Result<String, Error> {
+    let id = ID_COUNTER.with(|counter| {
+        let counter_value = *counter.borrow().get();
+        let _ = counter.borrow_mut().set(counter_value + 1);
+        counter_value
+    });
 
-    2. Update the investments field of the investor
+    let mut total_to_pay: f64 = 0.00;
 
-    3. Deduct money from their wallet
+    let company = COMPANYSTORAGE.with(|company_storage| company_storage.borrow().get(&company_id));
+    match company {
+        Some(company) => {
+            let token_info = _calculate_outstanding_tokens(company);
+            if token_info.0 < amount {
+                //no enough tokens to buy
+                return Err(Error::NotFound {
+                    msg: format!("The company does not have enough outstanding tokens!"),
+                });
+            }
+            total_to_pay = token_info.0 as f64 * token_info.1;
+        }
+        None => {
+            return Err(Error::NotFound {
+                msg: format!("No enough balance to buy tokens!"),
+            });
+        }
+    }
 
-    4. Add money to the company's wallet
+    //convert this total_to_pay in icp tokens using exchange rate canister
 
+    let ledger_canister_id = STATE
+        .with(|s| s.borrow().ledger)
+        .unwrap_or(MAINNET_LEDGER_CANISTER_ID);
+    let wallet_balance = get_balance(ledger_canister_id).0.to_f64().unwrap();
+    if total_to_pay < wallet_balance {
+        // you do not have enough cash for this
+        return Err(Error::NotFound {
+            msg: format!("No enough balance to buy tokens!"),
+        });
+    }
+    // transfer the icp to companies adress
+    credit(
+        COMPANYSTORAGE
+            .with(|company_storage| company_storage.borrow().get(&company_id))
+            .unwrap()
+            .principal,
+        ledger_canister_id,
+        (total_to_pay as u128).into(),
+    );
+    Ok("Succefully bought tokens".to_string())
+}
 
+fn _calculate_outstanding_tokens(company: CompanyInformation) -> (u128, f64) {
+    let valuation = company.tokenization_info.valuation;
+    let percent_to_tokenize: f64 = company.tokenization_info.percent_to_tokenize.into();
+    let outstanding_value = (valuation * percent_to_tokenize) / 100.00;
+    let company_class = company.tokenization_info.class.value();
+    let per_token_per_price = outstanding_value / company_class as f64;
 
-     */
-    //   place_order(from_token_canister_id, from_amount, to_token_canister_id, to_amount)
+    (company_class, per_token_per_price)
+}
+#[derive(candid::CandidType, Deserialize, Serialize, Debug)]
+enum Error {
+    NotFound { msg: String },
 }
 
 ic_cdk::export_candid!();
