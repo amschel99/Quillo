@@ -1,0 +1,22 @@
+@import "../constants/colors";
+@import "../constants/mixins";
+
+.animationctr {
+  @include flexmixin(row, no-wrap, center, space-between, 0);
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  background-color: $divider;
+
+  span {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .animation {
+    height: 4rem;
+  }
+}

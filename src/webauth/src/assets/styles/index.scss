@@ -1,0 +1,27 @@
+@import "./constants/colors";
+@import "./constants/mixins";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @include usebasefont();
+  font-size: 1rem;
+  color: $text_primary;
+  background-color: $primary;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
