@@ -22,7 +22,7 @@ use super::{exchange::*, stable};
 const ICP_FEE: u64 = 10_000;
 
 thread_local! {
-    static STATE: RefCell<State> = RefCell::new(State::default());
+    pub static STATE: RefCell<State> = RefCell::new(State::default());
 }
 
 pub struct Type {}
