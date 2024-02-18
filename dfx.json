@@ -5,7 +5,6 @@
       "package": "quillo_backend",
       "type": "rust"
     }
-   
   },
   "defaults": {
     "build": {
