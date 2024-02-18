@@ -1,10 +1,8 @@
 #![allow(dead_code, unused_variables, unused_imports)]
 #[macro_use]
 extern crate serde;
-
 use candid::{candid_method, Decode, Encode, Nat, Principal};
 use dao::service::InitPayload;
-
 use ic_cdk::api::time;
 use ic_ledger_types::{AccountIdentifier, MAINNET_LEDGER_CANISTER_ID};
 use ic_stable_structures::memory_manager::{MemoryId, MemoryManager, VirtualMemory};
@@ -13,7 +11,6 @@ use ic_stable_structures::{
 };
 use investor::types::Investor;
 use num_traits::ToPrimitive;
-
 use std::ops::Deref;
 use std::{borrow::Cow, cell::RefCell};
 mod company;
@@ -90,14 +87,12 @@ fn signup_company(payload: CompanyInformation) {
     };
     company.dao_id = Some(_assign_dao(&company, governance_params));
 }
-//Helper function to insert a company
+
 fn _signup_company(company: &CompanyInformation) {
     COMPANYSTORAGE.with(|service| service.borrow_mut().insert(company.id, company.clone()));
 }
 
 fn _assign_dao(company: &CompanyInformation, governance_params: SystemParams) -> u64 {
-    //TODO Create a dao for the given company
-
     let id = ID_COUNTER.with(|counter| {
         let counter_value = *counter.borrow().get();
         let _ = counter.borrow_mut().set(counter_value + 1);
@@ -152,14 +147,13 @@ fn buy_tokens(amount: Nat, company_id: u64) -> Result<String, Error> {
         counter_value
     });
 
-    let mut total_to_pay: f64 = 0.00;
+    let total_to_pay: f64;
 
     let company = COMPANYSTORAGE.with(|company_storage| company_storage.borrow().get(&company_id));
     match company {
         Some(company) => {
             let token_info = _calculate_outstanding_tokens(company);
             if token_info.0 < amount {
-                //no enough tokens to buy
                 return Err(Error::NotFound {
                     msg: format!("The company does not have enough outstanding tokens!"),
                 });
@@ -173,19 +167,16 @@ fn buy_tokens(amount: Nat, company_id: u64) -> Result<String, Error> {
         }
     }
 
-    //convert this total_to_pay in icp tokens using exchange rate canister
-
     let ledger_canister_id = STATE
         .with(|s| s.borrow().ledger)
         .unwrap_or(MAINNET_LEDGER_CANISTER_ID);
     let wallet_balance = get_balance(ledger_canister_id).0.to_f64().unwrap();
     if total_to_pay < wallet_balance {
-        // you do not have enough cash for this
         return Err(Error::NotFound {
             msg: format!("No enough balance to buy tokens!"),
         });
     }
-    // transfer the icp to companies adress
+
     credit(
         COMPANYSTORAGE
             .with(|company_storage| company_storage.borrow().get(&company_id))
@@ -206,6 +197,7 @@ fn _calculate_outstanding_tokens(company: CompanyInformation) -> (u128, f64) {
 
     (company_class, per_token_per_price)
 }
+
 #[derive(candid::CandidType, Deserialize, Serialize, Debug)]
 enum Error {
     NotFound { msg: String },
