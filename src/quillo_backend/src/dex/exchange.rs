@@ -1,11 +1,9 @@
-use std::collections::HashMap;
-
-use candid::{Nat, Principal};
-use ic_cdk::caller;
-
 use super::types::*;
 use super::utils;
 use super::utils::*;
+use candid::{Nat, Principal};
+use ic_cdk::caller;
+use std::collections::HashMap;
 
 #[derive(Default)]
 pub struct Balances(pub HashMap<Principal, HashMap<Principal, Nat>>); // owner -> token_canister_id -> amount
@@ -29,7 +27,6 @@ impl Balances {
         }
     }
 
-    // Tries to substract balance from user account. Checks for overflows
     pub fn subtract_balance(
         &mut self,
         owner: &Principal,
@@ -40,7 +37,6 @@ impl Balances {
             if let Some(x) = balances.get_mut(token_canister_id) {
                 if *x >= delta {
                     *x -= delta;
-                    // no need to keep an empty token record
                     if *x == utils::zero() {
                         balances.remove(token_canister_id);
                     }
@@ -170,9 +166,6 @@ impl Exchange {
             }
 
             if a.from == b.to && a.to == b.from {
-                // Simplified to use multiplication from
-                // (a.fromAmount / a.toAmount) * (b.fromAmount / b.toAmount) >= 1
-                // which checks that this pair of trades is profitable.
                 if a.fromAmount.to_owned() * b.fromAmount.to_owned()
                     >= a.toAmount.to_owned() * b.toAmount.to_owned()
                 {
@@ -193,14 +186,15 @@ impl Exchange {
             let mut a_to_amount: Nat = utils::zero();
             let mut b_to_amount: Nat = utils::zero();
             let (a, b) = m;
-            // Check if some orders can be completed in their entirety.
+
             if b.fromAmount >= a.toAmount {
                 a_to_amount = a.toAmount.to_owned();
             }
+
             if a.fromAmount >= b.toAmount {
                 b_to_amount = b.toAmount.to_owned();
             }
-            // Check if some orders can be completed partially.
+
             if check_orders(
                 a.to_owned(),
                 b.to_owned(),
@@ -209,6 +203,7 @@ impl Exchange {
             ) {
                 continue;
             }
+
             if check_orders(
                 b.to_owned(),
                 a.to_owned(),
@@ -242,27 +237,23 @@ impl Exchange {
         let mut order_a = orders.remove(&a).unwrap();
         let mut order_b = orders.remove(&b).unwrap();
 
-        // Calculate "cost" to each
         let a_from_amount =
             (a_to_amount.to_owned() * order_a.fromAmount.to_owned()) / order_a.toAmount.to_owned();
         let b_from_amount =
             (b_to_amount.to_owned() * order_b.fromAmount.to_owned()) / order_b.toAmount.to_owned();
 
-        // Update order with remaining tokens
         order_a.fromAmount -= a_from_amount.to_owned();
         order_a.toAmount -= a_to_amount.to_owned();
 
         order_b.fromAmount -= b_from_amount.to_owned();
         order_b.toAmount -= b_to_amount.to_owned();
 
-        // Update DEX balances
         balances.subtract_balance(&order_a.owner, &order_a.from, a_from_amount.to_owned());
         balances.add_balance(&order_a.owner, &order_a.to, a_to_amount.to_owned());
 
         balances.subtract_balance(&order_b.owner, &order_b.from, b_from_amount.to_owned());
         balances.add_balance(&order_b.owner, &order_b.to, b_to_amount.to_owned());
 
-        // The DEX keeps any tokens not required to satisfy the parties.
         let dex_amount_a = a_from_amount - b_to_amount;
         if dex_amount_a > utils::zero() {
             balances.add_balance(&ic_cdk::id(), &order_a.from, dex_amount_a);
@@ -273,7 +264,6 @@ impl Exchange {
             balances.add_balance(&ic_cdk::id(), &order_b.from, dex_amount_b);
         }
 
-        // Maintain the order only if not empty
         if order_a.fromAmount != utils::zero() {
             orders.insert(order_a.id, order_a);
         }
@@ -299,7 +289,6 @@ fn check_orders(
 ) -> bool {
     if *first_to_amount == utils::zero() && second_to_amount > utils::zero() {
         *first_to_amount = second.fromAmount;
-        // Verify that we can complete the partial order with natural number tokens remaining.
         if ((first_to_amount.to_owned() * first.fromAmount) % first.toAmount) != utils::zero() {
             return true;
         }

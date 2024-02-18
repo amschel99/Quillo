@@ -18,6 +18,7 @@ pub enum TxError {
     ErrorTo,
     Other,
 }
+
 pub type TxReceipt = Result<Nat, TxError>;
 
 #[allow(non_snake_case)]

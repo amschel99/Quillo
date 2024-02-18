@@ -1,15 +1,3 @@
-use std::cell::RefCell;
-use std::convert::TryInto;
-
-use candid::{candid_method, export_service, Nat, Principal};
-use ic_cdk::caller;
-
-use ic_ledger_types::{
-    AccountIdentifier, Memo, Tokens, DEFAULT_SUBACCOUNT, MAINNET_LEDGER_CANISTER_ID,
-};
-
-use crate::dex::types::WithdrawErr;
-
 use super::stable::State;
 use super::types::{
     Balance, CancelOrderReceipt, DepositErr, DepositReceipt, Order, OrderId, OrderPlacementReceipt,
@@ -18,6 +6,14 @@ use super::types::{
 use super::utils::*;
 use super::TOKEN;
 use super::{exchange::*, stable};
+use crate::dex::types::WithdrawErr;
+use candid::{candid_method, export_service, Nat, Principal};
+use ic_cdk::caller;
+use ic_ledger_types::{
+    AccountIdentifier, Memo, Tokens, DEFAULT_SUBACCOUNT, MAINNET_LEDGER_CANISTER_ID,
+};
+use std::cell::RefCell;
+use std::convert::TryInto;
 
 const ICP_FEE: u64 = 10_000;
 
@@ -196,8 +192,6 @@ pub async fn withdraw(
         .with(|s| s.borrow().ledger)
         .unwrap_or(MAINNET_LEDGER_CANISTER_ID);
 
-    // Close all currently open orders to avoid completing orders
-    // without funds.
     STATE.with(|s| {
         s.borrow_mut()
             .exchange
@@ -313,7 +307,6 @@ pub fn whoami() -> Principal {
     caller()
 }
 
-// For testing
 #[ic_cdk::update]
 #[candid_method(oneway)]
 pub fn credit(user: Principal, token_canister_id: Principal, amount: Nat) {
@@ -330,7 +323,6 @@ pub fn credit(user: Principal, token_canister_id: Principal, amount: Nat) {
     })
 }
 
-// For testing.
 #[ic_cdk::update]
 #[candid_method(oneway)]
 pub fn clear() {
@@ -352,30 +344,20 @@ fn init(ledger: Option<Principal>) {
     });
 }
 
-// NOTE: Converting and storing state like this should not be used in production.
-// If the state becomes too large, it can prevent future upgrades. This
-// is left in as a tool during development. If removed, native types
-// can be used throughout, instead.
 #[ic_cdk::pre_upgrade]
 fn pre_upgrade() {
     let state = STATE.with(|s| s.take());
 
-    // Transform into stable state
     let stable_state: stable::StableState = state.into();
 
     ic_cdk::storage::stable_save((stable_state,)).expect("failed to save stable state");
 }
 
-// NOTE: Converting and storing state like this should not be used in production.
-// If the state becomes too large, it can prevent future upgrades. This
-// is left in as a tool during development. If removed, native types
-// can be used throughout, instead.
 #[ic_cdk::post_upgrade]
 fn post_upgrade() {
     let (stable_state,): (stable::StableState,) =
         ic_cdk::storage::stable_restore().expect("failed to restore stable state");
 
-    // Transform from stable state
     let state = stable_state.into();
 
     STATE.with(|s| {

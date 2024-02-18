@@ -1,15 +1,9 @@
-// NOTE: Converting and storing state like this should not be used in production.
-// If the state becomes too large, it can prevent future upgrades. This
-// is left in as a tool during development. If removed, native types
-// can be used throughout, instead.
-
-use std::collections::HashMap;
-
-use candid::{CandidType, Principal};
-use serde::{Deserialize, Serialize};
-
 use crate::dex::exchange::{Balances, Exchange};
 use crate::dex::types::*;
+use candid::{CandidType, Principal};
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
 #[derive(Default)]
 pub struct State {
     pub owner: Option<Principal>,
@@ -54,7 +48,7 @@ impl From<StableOrder> for Order {
 }
 
 #[derive(CandidType, Deserialize, Serialize)]
-pub struct StableBalances(pub HashMap<Principal, HashMap<Principal, String>>); // owner -> token_canister_id -> amount
+pub struct StableBalances(pub HashMap<Principal, HashMap<Principal, String>>);
 
 impl From<Balances> for StableBalances {
     fn from(input: Balances) -> Self {

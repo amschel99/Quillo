@@ -1,8 +1,7 @@
-use std::borrow::Cow;
-
 use candid::{Decode, Encode, Principal};
 use ic_stable_structures::{BoundedStorable, Storable};
 use icrc_ledger_types::icrc1::transfer::NumTokens;
+use std::borrow::Cow;
 
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub struct Investor {
@@ -16,6 +15,7 @@ pub struct Investment {
     dao_id: u64,
     tokens_owned: NumTokens,
 }
+
 impl Storable for Investor {
     fn to_bytes(&self) -> std::borrow::Cow<[u8]> {
         Cow::Owned(Encode!(self).unwrap())

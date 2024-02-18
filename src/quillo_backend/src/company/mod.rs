@@ -27,8 +27,6 @@ pub struct CompanyTokenizationInfo {
     pub price_per_token: f64,
 }
 
-/* A file is stored as a buffer of string */
-
 #[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 
 pub struct CompanyLegalDocuments {

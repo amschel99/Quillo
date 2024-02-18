@@ -1,8 +1,6 @@
-use icrc_ledger_types::icrc1::{account::Account, transfer::NumTokens};
-
-use crate::Class;
-
 use super::types::{Dao, SystemParams};
+use crate::Class;
+use icrc_ledger_types::icrc1::{account::Account, transfer::NumTokens};
 
 impl Dao {
     pub fn new(payload: InitPayload) -> Self {
@@ -16,8 +14,8 @@ impl Dao {
         }
     }
 }
-#[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 
+#[derive(candid::CandidType, Clone, Serialize, Deserialize)]
 pub struct InitPayload {
     pub id: u64,
     pub system_params: SystemParams,

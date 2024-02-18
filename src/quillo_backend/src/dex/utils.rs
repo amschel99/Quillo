@@ -1,10 +1,8 @@
-use std::convert::TryInto;
-
 use candid::{Nat, Principal};
 use ic_ledger_types::Subaccount;
-
 use num_bigint::BigUint;
 use num_traits::Zero;
+use std::convert::TryInto;
 
 pub fn zero() -> Nat {
     Nat(BigUint::zero())

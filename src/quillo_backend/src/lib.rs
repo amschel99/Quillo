@@ -119,6 +119,7 @@ fn _assign_dao(company: &CompanyInformation, governance_params: SystemParams) ->
 fn save_dao(dao: Dao) {
     DAOSTORAGE.with(|service| service.borrow_mut().insert(dao.id, dao.clone()));
 }
+
 #[ic_cdk::update]
 
 fn signup_investor(investor: Investor) {
